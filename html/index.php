@@ -48,6 +48,9 @@ if (!isset($_SESSION['preloader_displayed'])) {
               <img src="../img/logo.png" alt="FreeDMR" width="100%">
             </div>
           </div>
+          <div>
+            <br>
+          </div>
         </div>
       </div>
       <div class="content">
