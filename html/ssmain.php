@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="plugins/adminlte/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode layout-top-nav layout-navbar-fixed text-sm accent-warning">
+<body class="hold-transition dark-mode layout-top-nav layout-navbar-fixed text-sm">
     <div class="wrapper">
         <?php if ($display_preloader): ?>
         <div class="preloader flex-column justify-content-center align-items-center">
@@ -340,6 +340,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <br>
                     </div>
                 </div>
             </div>
