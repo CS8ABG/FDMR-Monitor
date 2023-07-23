@@ -48,9 +48,6 @@ if (!isset($_SESSION['preloader_displayed'])) {
               <img src="../img/logo.png" alt="FreeDMR" width="100%">
             </div>
           </div>
-          <div>
-            <br>
-          </div>
         </div>
       </div>
       <div class="content">
@@ -58,6 +55,9 @@ if (!isset($_SESSION['preloader_displayed'])) {
           $page = isset($_GET['p']) ? $_GET['p'] : 'home';
               include 'include/' . $page . '.php';
         ?>
+        <div>
+          <br>
+        </div>
       </div>
     </div>
     <footer class="main-footer text-sm">
