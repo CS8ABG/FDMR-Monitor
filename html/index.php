@@ -26,6 +26,19 @@ if (!isset($_SESSION['preloader_displayed'])) {
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="plugins/adminlte/css/adminlte.min.css">
+  <style>
+    @media (min-width: 768px) {
+      .table-responsive {
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .table-responsive {
+        zoom: 0.5; 
+      }
+    }
+  </style>
 </head>
 
 <body class="hold-transition dark-mode layout-top-nav layout-navbar-fixed text-sm">
