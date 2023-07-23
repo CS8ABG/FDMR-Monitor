@@ -1,0 +1,51 @@
+{% if _table['OPENBRIDGES']|length >0 %}
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header border-transparent">
+        <h3 class="card-title" id="topb"></h3>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table m-0 table-striped table-sm">
+            <thead>
+              <tr>
+                <th style="width: 15%;" id="topb_opb"></th>
+                <th style="width: 10%;" id="topb_netid"></th>
+                <th style="width: 75%;" id="topb_act"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for _openbridge in _table['OPENBRIDGES'] %}
+              {% set opbnum = _table['OPENBRIDGES'][_openbridge]['NETWORK_ID']|safe %}
+              {% set ctrynum = opbnum[0:3] %}
+              <tr>
+                <td style="vertical-align: middle;"><img src="/flags/{{ ctrynum }}.png">&nbsp;<b>{{ _openbridge}}</b>
+                </td>
+                <td style="vertical-align: middle;"><b>{{ _table['OPENBRIDGES'][_openbridge]['NETWORK_ID']
+                    }}</b></td>
+                <td style="vertical-align: middle;">
+                  {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS'] %}
+                  <span
+                    class="badge {{ 'badge-success' if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' else 'badge-danger' }}">
+                    {{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] }}:&nbsp;
+                    {{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][1] }}&nbsp;>>
+                    TG&nbsp;{{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][2] }}
+                  </span>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="preloader flex-column justify-content-center align-items-center">
+  <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+  <span class="info-box-text" id="pre_wait"></span>
+</div>
+{% endif %}

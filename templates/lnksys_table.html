@@ -1,0 +1,560 @@
+<!-- Statistics boxes -->
+{% set countrepeaters = namespace(value=0) %}
+{% set counthotspots = namespace(value=0) %}
+{% set countbridges = namespace(value=0) %}
+
+{% if _table['MASTERS']|length > 0 %}
+{% for _master in _table['MASTERS'] %}
+{% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0) and
+emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
+{% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+{% if _client < 900000 %} {% set countrepeaters.value=countrepeaters.value + 1 %} {% endif %} {% if _client> 999999 and
+  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+  {% set counthotspots.value = counthotspots.value + 1 %}
+  {% endif %}
+  {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
+  {% set countbridges.value = countbridges.value + 1 %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  {% else %}
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+    <span class="info-box-text" id="pre_wait"></span>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{ countrepeaters.value }}</h3>
+          <p id="smb_rptr"></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-radio-waves"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{ counthotspots.value }}</h3>
+          <p id="smb_htspts"></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-ios-people"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>{{ countbridges.value }}</h3>
+          <p id="smb_brdg"></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-arrow-swap"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Repeaters -->
+  {% if _table['MASTERS']|length > 0 %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title" id="tbl_rptrs"></h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0 table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th class="align-middle text-center" style="width: 180px;"><span id="trpt_callsign"></span> <span
+                      class="badge badge-info" id="trpt_id"></span><br><span id="trpt_loc"></span></th>
+                  <th class="align-middle text-center" style="width: 90px;" id="trpt_contime"></th>
+                  <th class="align-middle text-center" style="width: 40px;"id="trpt_slot"></th>
+                  <th class="align-middle text-center" id="trpt_src"></th>
+                  <th class="align-middle text-center"id="trpt_dst"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for _master in _table['MASTERS'] %}
+                {% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0)
+                and
+                emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
+                {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+                {% if _client < 900000 %} 
+                  <tr>
+                    <td>
+                      {% set idnum = _client|safe %}
+                      {% if idnum|length > 2 %}
+                      {% set ctrynum = idnum[0:3] %}
+                      <img src="/flags/{{ ctrynum }}.png">
+                      {% else %}
+                      <img src="/flags/world.png">
+                      {% endif %}
+                      <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}"
+                        data-toggle="tooltip" data-html="true" title="
+{{_master}}
+{% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}Tipo: Rede IP {% else %}Tipo: Radio ({{ _cdata['SLOTS'] }})
+TX: {{_cdata['TX_FREQ'] }}
+RX: {{_cdata['RX_FREQ'] }}
+TS1: {{ _cdata['TS1_STATIC']|join(', ') }}
+TS2: {{ _cdata['TS2_STATIC']|join(', ') }}{% endif %}
+Software: {{_cdata['SOFTWARE_ID'] }}
+Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
+                      </span>
+                      <span class="badge badge-info">{{ _client }}</span>
+                    </td>
+                    <td rowspan="2" class="bg-success align-middle text-center">{{ _cdata['CONNECTED'] }}</td>
+                    <td class="table-active align-middle text-center">
+                      <span class="badge badge-pill
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS1</span>
+                    </td>
+                    <td class="table-active align-middle text-center">
+                      <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['SUB']|safe }}</span>
+                    </td>
+                    <td class="table-active align-middle text-center">
+                      <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['DEST']|safe }}</span>
+                    </td>
+                  <tr>
+                    <td class="p-0 align-middle text-center">{{_cdata['LOCATION']}}</td>
+                    <td class="align-middle text-center">
+                      <span class="badge badge-pill 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS2</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['SUB']|safe }}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['DEST']|safe }}</span>
+                    </td>
+                  </tr>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- HotSpots -->
+  {% if _table['MASTERS']|length > 0 %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title" id="tbl_htspts"></h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0 table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th class="align-middle text-center" style="width: 180px;"><span id="thtsp_callsign"></span> <span
+                      class="badge badge-info" id="thtsp_id"></span><br><span id="thtsp_loc"></span></th>
+                  <th class="align-middle text-center" style="width: 90px;" id="thtsp_contime"></th>
+                  <th class="align-middle text-center" style="width: 40px;" id="thtsp_slot"></th>
+                  <th class="align-middle text-center" id="thtsp_src"></th>
+                  <th class="align-middle text-center" id="thtsp_dst"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for _master in _table['MASTERS'] %}
+                {% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0)
+                and emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
+                {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+                {% if _client > 999999 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+                <tr>
+                  <td>
+                    {% set idnum = _client|safe %}
+                    {% if idnum|length > 2 %}
+                    {% set ctrynum = idnum[0:3] %}
+                    <img src="/flags/{{ ctrynum }}.png">
+                    {% else %}
+                    <img src="/flags/world.png">
+                    {% endif %}
+                    <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}" data-toggle="tooltip"
+                          data-html="true" title="
+{{_master}}
+{% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}Tipo: Rede IP {% else %}Tipo: Radio ({{ _cdata['SLOTS'] }})
+TX: {{_cdata['TX_FREQ'] }}
+RX: {{_cdata['RX_FREQ'] }}
+TS1: {{ _cdata['TS1_STATIC']|join(', ') }}
+TS2: {{ _cdata['TS2_STATIC']|join(', ') }}{% endif %}
+Software: {{_cdata['SOFTWARE_ID'] }}
+Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
+                    </span>
+                    <span class="badge badge-info">{{ _client }}</span>
+                  </td>
+                  <td rowspan="2" class="bg-success align-middle text-center">{{ _cdata['CONNECTED'] }}</td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge badge-pill
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS1</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['SUB']|safe }}</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['DEST']|safe }}</span>
+                  </td>
+                <tr>
+                  <td class="p-0 align-middle text-center">{{_cdata['LOCATION']}}</td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-pill 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS2</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['SUB']|safe }}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['DEST']|safe }}</span>
+                  </td>
+                </tr>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Bridges -->
+  {% if _table['MASTERS']|length > 0 %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title" id="tbl_brdgs"></h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0 table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th class="align-middle text-center" style="width: 180px;"><span id="tbrdg_callsign"></span> <span
+                      class="badge badge-info" id="tbrdg_id"></span><br><span id="tbrdg_loc"></span></th>
+                  <th class="align-middle text-center" style="width: 90px;" id="tbrdg_contime"></th>
+                  <th class="align-middle text-center" style="width: 40px;" id="tbrdg_slot"></th>
+                  <th class="align-middle text-center" id="tbrdg_src"></th>
+                  <th class="align-middle text-center" id="tbrdg_dst"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for _master in _table['MASTERS'] %}
+                {% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0)
+                and emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
+                {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+                {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
+                  <td>
+                    {% set idnum = _client|safe %}
+                    {% if idnum|length > 2 %}
+                    {% set ctrynum = idnum[0:3] %}
+                    <img src="/flags/{{ ctrynum }}.png">
+                    {% else %}
+                    <img src="/flags/world.png">
+                    {% endif %}
+                    <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}" data-toggle="tooltip"
+                          data-html="true" title="
+{{_master}}
+{% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}Tipo: Rede IP {% else %}Tipo: Radio ({{ _cdata['SLOTS'] }})
+TX: {{_cdata['TX_FREQ'] }}
+RX: {{_cdata['RX_FREQ'] }}
+TS1: {{ _cdata['TS1_STATIC']|join(', ') }}
+TS2: {{ _cdata['TS2_STATIC']|join(', ') }}{% endif %}
+Software: {{_cdata['SOFTWARE_ID'] }}
+Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
+                    </span>
+                    <span class="badge badge-info">{{ _client }}</span>
+                  </td>
+                  <td rowspan="2" class="bg-success align-middle text-center">{{ _cdata['CONNECTED'] }}</td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge badge-pill
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS1</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['SUB']|safe }}</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[1]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[1]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[1]['DEST']|safe }}</span>
+                  </td>
+                <tr>
+                  <td class="p-0 align-middle text-center">{{_cdata['LOCATION']}}</td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-pill 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% else %}
+                              badge-secondary
+                            {% endif %}
+                            ">TS2</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['SUB']|safe }}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                            {% if _cdata[2]['TRX'] == 'RX' %}
+                              badge-danger
+                            {% elif _cdata[2]['TRX'] == 'TX' %}
+                              badge-success
+                            {% endif %}
+                            ">{{ _cdata[2]['DEST']|safe }}</span>
+                  </td>
+                </tr>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Services -->
+  {% if _table['PEERS']|length >0 %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title" id="tbl_srv"></h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0 table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th class="align-middle text-center p-0" style="width: 140px;"><span id="tsrv_service"></span><br><span id="tsrv_mode"></span></th>
+                  <th class="align-middle text-center" style="width: 180px;"><span id="tsrv_callsign"></span> <span
+                      class="badge badge-info" id="tsrv_id"></span><br><span id="tsrv_info"></span></th>
+                  <th class="align-middle text-center" style="width: 90px;"><span id="tsrv_contime"></span><br><span id="tsrv_trl"></span></th>
+                  <th class="align-middle text-center" style="width: 40px;" id="tsrv_slot"></th>
+                  <th class="align-middle text-center" id="tsrv_src"></th>
+                  <th class="align-middle text-center" id="tsrv_dst"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for _peer, _pdata in _table['PEERS'].items() %}
+                <tr>
+                  <td class="align-middle text-center p-0" rowspan="3">
+                    <span><b>{{ _peer}}</b></span><br>
+                    <span>{{ _table['PEERS'][_peer]['MODE'] }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="align-middle text-center">
+                    <span><b><a target="_blank" href="#" data-toggle="tooltip" data-html="true"
+                          title="Time Slot: {{ _table['PEERS'][_peer]['SLOTS'] }}">{{_table['PEERS'][_peer]['CALLSIGN']}}</a></b></span>
+                    <span class="badge badge-info">{{ _table['PEERS'][_peer]['RADIO_ID']}}</span>
+                  </td>
+                  <td rowspan="2" class="align-middle text-center
+                  {% if _table['PEERS'][_peer]['STATS']['CONNECTION'] == 'YES' %}
+                      bg-success
+                    {% else %}
+                      bg-warning
+                    {% endif %}">
+                    {{ _table['PEERS'][_peer]['STATS']['CONNECTED'] }}<br>
+                    <div style="font-size: smaller;">{{ _table['PEERS'][_peer]['STATS']['PINGS_SENT'] }} / {{
+                      _table['PEERS'][_peer]['STATS']['PINGS_ACKD'] }} / {{
+                      _table['PEERS'][_peer]['STATS']['PINGS_SENT'] - _table['PEERS'][_peer]['STATS']['PINGS_ACKD'] }}
+                    </div>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge badge-pill
+                      {% if _pdata[1]['TRX'] == 'RX' %}
+                        badge-danger
+                      {% elif _pdata[1]['TRX'] == 'TX' %}
+                        badge-success
+                      {% else %}
+                        badge-secondary
+                      {% endif %}
+                    ">TS1</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                    {% if _pdata[1]['TRX'] == 'RX' %}
+                      badge-danger
+                    {% elif _pdata[1]['TRX'] == 'TX' %}
+                      badge-success
+                    {% endif %}
+                    ">{{ _pdata[1]['SUB']|safe }}</span>
+                  </td>
+                  <td class="table-active align-middle text-center">
+                    <span class="badge 
+                    {% if _pdata[1]['TRX'] == 'RX' %}
+                      badge-danger
+                    {% elif _pdata[1]['TRX'] == 'TX' %}
+                      badge-success
+                    {% endif %}
+                    ">{{ _pdata[1]['DEST']|safe }}</span>
+                  </td>
+                <tr>
+                  <td class="p-0 align-middle text-center">{{_table['PEERS'][_peer]['LOCATION']}}</td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-pill 
+                      {% if _pdata[2]['TRX'] == 'RX' %}
+                        badge-danger
+                      {% elif _pdata[2]['TRX'] == 'TX' %}
+                        badge-success
+                      {% else %}
+                        badge-secondary
+                      {% endif %}
+                      ">TS2</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                      {% if _pdata[2]['TRX'] == 'RX' %}
+                        badge-danger
+                      {% elif _pdata[2]['TRX'] == 'TX' %}
+                        badge-success
+                      {% endif %}
+                      ">{{ _pdata[2]['SUB']|safe }}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge 
+                      {% if _pdata[2]['TRX'] == 'RX' %}
+                        badge-danger
+                      {% elif _pdata[2]['TRX'] == 'TX' %}
+                        badge-success
+                      {% endif %}
+                      ">{{ _pdata[2]['DEST']|safe }}</span>
+                  </td>
+                </tr>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}

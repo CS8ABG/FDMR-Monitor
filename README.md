@@ -1,22 +1,15 @@
-**FDMR Monitor is a "web dashboard" for FreeDMR servers by OA4DOA.**
+**Dashboard with Self Service for FreeDMR Servers**
 
-***This version has been forked from HBMonitor V2 by SP2ONG 2019-2022***
+![Dashboard](./screenshot.png)
 
-**This branch includes the Self Service page for configuring options through a web interface**  
+***This version has been forked from FDMR Monitor with Self Service by OA4DOA.***
 
-If you are looking for the version that doesn't include Self Service please click [here.](https://github.com/yuvelq/FDMR-Monitor)
 
-Some of the changes in FDMR Monitor:
-- Select options through Self Service web interface.
-- TG Count page added.
-- Config file added.
-- It's integrated with MariaDB database.
-- Improved usage of memory and CPU.
-- Broadcasting groups has been added to save server's resources.
-- JavaScript code was added to support broadcasting groups.
-- The code has been updated to HTML5.
-- Static and single TG's page added.
-- Data QSO's now are showed in the dashboard.
+## Changes to the Dashboard
+
+**This branch has exactly the same features as the main branch, including Self Service.**
+
+## Install Instructions
 
 FDMR Monitor has been tested on Debian v10 and v11
 
@@ -49,7 +42,7 @@ be prepeard with the next information to make the installation easier:
 
 ```
   cd /opt  
-  sudo git clone https://github.com/yuvelq/FDMR-Monitor.git  
+  sudo git clone https://github.com/CS8ABG/FDMR-Monitor.git  
   cd FDMR-Monitor  
   sudo git checkout Self_Service  
   sudo chmod +x install.sh  
@@ -85,6 +78,12 @@ be prepeard with the next information to make the installation easier:
   sudo python3 mon_db.py
   sudo systemct start fdmr_mon
 ```
+
+---
+
+**FDMR Monitor by OA4DOA**
+
+FDMR Monitor for FreeDMR Servera based on HBMonv2 https://github.com/yuvelq/FDMR-Monitor 
 
 ---
 

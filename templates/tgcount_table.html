@@ -1,0 +1,70 @@
+{% if _table|length > 0 %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title" id="ttptg">TOP TG&apos;s</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0 table-striped table-sm">
+              <thead>
+              <tr>
+                <th style='width: 95px;' id="ttptg_tgid">TG ID</th>
+                <th style='width: 515px;' id="ttptg_tgname">Nome do TG</th>
+                <th style='width: 85px;' id="ttptg_tgqs">Numero de QSO&apos;s</th>
+                <th style='width: 95px;' id="ttptg_tottime">Tempo Total</th>
+                <th style='width: 310px;' id="ttptg_topcall">Indicativos mais vistos</th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for itm in _table %}
+                  <tr>
+                    <td><b>{{ itm[0] }}</b></td>
+                    <td>
+                        {% set tgnum = itm[0]|safe  %}
+                        {% if tgnum|length > 2 %}
+                        {% set ctrynum = tgnum[0:3]  %}
+                        <img src="/flags/{{ ctrynum }}.png">
+                        {% else %}
+                        <img src="/flags/world.png">
+                        {% endif %}
+                        <b>&nbsp;{{ itm[1]|safe }}&nbsp;</b>
+                        {% set tgname = itm[1]|safe %}
+                        {% if 'fcs' in tgname.lower() or 'ysf' in tgname.lower() or 'wiresx' in tgname.lower() %}
+                        <img src="/flags/yaesu.png" alt="Yaesu System Fusion">
+                        {% endif %}
+                        {% if 'echo' in tgname.lower() or 'echolink' in tgname.lower() %}
+                        <img src="/flags/echolink.png" alt="Echolink">
+                        {% endif %}
+                        {% if 'asl' in tgname.lower() or 'allstar' in tgname.lower() or 'allstarlink' in tgname.lower() %}
+                        <img src="/flags/allstar.png" alt="AllStarLink">
+                        {% endif %}
+                        {% if 'tetra' in tgname.lower() %}
+                        <img src="/flags/tetra.png" alt="Tetra">
+                        {% endif %}
+                        {% if 'd*' in tgname.lower() or 'dstar' in tgname.lower() or 'xlx' in tgname.lower() or 'multiprotocol' in tgname.lower() or 'multi protocol' in tgname.lower() or 'multi-protocol' in tgname.lower() %}
+                        <img src="/flags/dstar.png" alt="XLX">
+                        {% endif %}
+                        {% if 'm17' in tgname.lower() %}
+                        <img src="/flags/m17.png" alt="M17">
+                        {% endif %}
+                      </td>
+                    <td>{{ itm[2] }}</td>
+                    <td><b>{{ itm[3] }}</b></td>
+                    <td><b>{{ itm[4]|join(' - ') }}</b></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+    <span class="info-box-text">Aguardando informa&ccedil;&atilde;o do Servidor...</span>
+  </div>
+{% endif %}

@@ -1,0 +1,1181 @@
+{
+    "title": {
+        "en": "FreeDMR Server",
+        "pt": "FreeDMR Server",
+        "es": "FreeDMR Server",
+        "fr": "FreeDMR Server",
+        "it": "FreeDMR Server",
+        "nl": "FreeDMR Server",
+        "de": "FreeDMR Server"
+    },
+    "nav_dash": {
+        "en": "Dashboard",
+        "pt": "Dashboard",
+        "es": "Tablero",
+        "fr": "Tableau de bord",
+        "it": "Dashboard",
+        "nl": "Dashboard",
+        "de": "Dashboard"
+    },
+    "nav_lnksys": {
+        "en": "Linked Systems",
+        "pt": "Sistemas Ligados",
+        "es": "Sistemas Enlazados",
+        "fr": "Systèmes Liés",
+        "it": "Sistemi Collegati",
+        "nl": "Gekoppelde Systemen",
+        "de": "Verknüpfte Systeme"
+    },
+    "nav_statg": {
+        "en": "Static TG's",
+        "pt": "TG's Estaticos",
+        "es": "TG Estáticos",
+        "fr": "TG Statiques",
+        "it": "TG Statici",
+        "nl": "TG Statisch",
+        "de": "Statische TGs"
+    },
+    "nav_opb": {
+        "en": "OpenBridge",
+        "pt": "OpenBridge",
+        "es": "OpenBridge",
+        "fr": "OpenBridge",
+        "it": "OpenBridge",
+        "nl": "OpenBridge",
+        "de": "OpenBridge"
+    },
+    "nav_tptg": {
+        "en": "TOP TG's",
+        "pt": "TOP TG's",
+        "es": "Top TG's",
+        "fr": "Top TG's",
+        "it": "Top TG's",
+        "nl": "Top TG's",
+        "de": "Top TG's"
+    },
+    "nav_mon": {
+        "en": "Monitor",
+        "pt": "Monitor",
+        "es": "Monitor",
+        "fr": "Moniteur",
+        "it": "Monitor",
+        "nl": "Monitor",
+        "de": "Monitor"
+    },
+    "nav_info": {
+        "en": "Info",
+        "pt": "Informações",
+        "es": "Información",
+        "fr": "Info",
+        "it": "Informazioni",
+        "nl": "Informaties",
+        "de": "Informationen"
+    },
+    "nav_tglst": {
+        "en": "TG List",
+        "pt": "Lista TG's",
+        "es": "Lista de TG",
+        "fr": "Liste des TG",
+        "it": "Elenco TG",
+        "nl": "Lijst van TG",
+        "de": "TG-Liste"
+    },
+    "nav_brdglst": {
+        "en": "Bridge List",
+        "pt": "Lista Bridges",
+        "es": "Lista de Puentes",
+        "fr": "Liste des Ponts",
+        "it": "Elenco Ponti",
+        "nl": "Lijst van brug",
+        "de": "Brückenliste"
+    },
+    "nav_srvlst": {
+        "en": "Server List",
+        "pt": "Lista de Servidores",
+        "es": "Lista de Servidores",
+        "fr": "Liste des Serveurs",
+        "it": "Elenco Server",
+        "nl": "Lijst van servers",
+        "de": "Serverliste"
+    },
+    "nav_calc": {
+        "en": "Options Calculator",
+        "pt": "Calculador de Opções",
+        "es": "Calculadora de Opciones",
+        "fr": "Calculatrice d’options",
+        "it": "Calcolatore di opzioni",
+        "nl": "Opties berekenen",
+        "de": "Optionsrechner"
+    },
+    "pre_wait": {
+        "en": "Waiting for server info...",
+        "pt": "Aguardando informação do servidor...",
+        "es": "Esperando información del servidor...",
+        "fr": "attente des informations du serveur...",
+        "it": "in attesa delle informazioni del server...",
+        "nl": "Wachten op informaties van server...",
+        "de": "Warten auf Serverinformationen..."
+    },
+    "smb_aq": {
+        "en": "Active QSO's",
+        "pt": "QSO's ativos",
+        "es": "QSO's activos",
+        "fr": "QSO actifs",
+        "it": "QSO attivi",
+        "nl": "Active QSO's",
+        "de": "Aktive QSOs"
+    },
+    "smb_rptr": {
+        "en": "Repeaters",
+        "pt": "Repetidores",
+        "es": "Repetidores",
+        "fr": "Répéteurs",
+        "it": "Ripetitori",
+        "nl": "Repeaters",
+        "de": "Repeater"
+    },
+    "smb_htspts": {
+        "en": "HotSpots",
+        "pt": "Hotspots",
+        "es": "HotSpots",
+        "fr": "HotSpots",
+        "it": "Hotspots",
+        "nl": "Hotspots",
+        "de": "Hotspots"
+    },
+    "smb_brdg": {
+        "en": "Bridges",
+        "pt": "Bridges",
+        "es": "Puentes",
+        "fr": "Ponts",
+        "it": "Ponti",
+        "nl": "Bruggen",
+        "de": "Brücken"
+    },
+    "act_tbl": {
+        "en": "Activity",
+        "pt": "Atividade",
+        "es": "Actividad",
+        "fr": "Activité",
+        "it": "Attività",
+        "nl": "Activiteit",
+        "de": "Aktivität"
+    },
+    "lh_tbl": {
+        "en": "Last Heard",
+        "pt": "Ultimos QSO's",
+        "es": "Últimas Escuchas",
+        "fr": "Dernières Écoutes",
+        "it": "Ultimi Ascolti",
+        "nl": "Laatst gehoord",
+        "de": "Letzte gehört"
+    },
+    "lh_date": {
+        "en": "Date",
+        "pt": "Data",
+        "es": "Fecha",
+        "fr": "Date",
+        "it": "Data",
+        "nl": "Datum",
+        "de": "Datum"
+    },
+    "lh_time": {
+        "en": "Time",
+        "pt": "Hora",
+        "es": "Hora",
+        "fr": "Heure",
+        "it": "Ora",
+        "nl": "Tijd",
+        "de": "Zeit"
+    },
+    "lh_callsignid": {
+        "en": "Callsign (ID)",
+        "pt": "Indicativo (ID)",
+        "es": "Indicativo (ID)",
+        "fr": "Indicatif (ID)",
+        "it": "Indicativo (ID)",
+        "nl": "Roepnaam (ID)",
+        "de": "Rufzeichen (ID)"
+    },
+    "lh_name": {
+        "en": "Name",
+        "pt": "Nome",
+        "es": "Nombre",
+        "fr": "Nom",
+        "it": "Nome",
+        "nl": "Naam",
+        "de": "Name"
+    },
+    "lh_tgnum": {
+        "en": "TG#",
+        "pt": "TG#",
+        "es": "TG#",
+        "fr": "TG#",
+        "it": "TG#",
+        "nl": "TG#",
+        "de": "TG#"
+    },
+    "lh_tgname": {
+        "en": "TG Name",
+        "pt": "Nome TG",
+        "es": "Nombre TG",
+        "fr": "Nom TG",
+        "it": "Nome TG",
+        "nl": "TG-Naam",
+        "de": "TG-Name"
+    },
+    "lh_system": {
+        "en": "Source",
+        "pt": "Origem",
+        "es": "Fuente",
+        "fr": "Source",
+        "it": "Sorgente",
+        "nl": "Oorsprong",
+        "de": "Quelle"
+    },
+    "lh_viewmore": {
+        "en": "+ View More",
+        "pt": "+ Ver mais",
+        "es": "+ Ver más",
+        "fr": "+ Voir plus",
+        "it": "+ Vedi altro",
+        "nl": "+ Meer zien",
+        "de": "+ Mehr anzeigen"
+    },
+    "crd_rptrs": {
+        "en": "Repeaters",
+        "pt": "Repetidores",
+        "es": "Repetidores",
+        "fr": "Répéteurs",
+        "it": "Ripetitori",
+        "nl": "Repeater",
+        "de": "Repeater"
+    },
+    "crd_htspts": {
+        "en": "HotSpots",
+        "pt": "Hotspots",
+        "es": "HotSpots",
+        "fr": "HotSpots",
+        "it": "Hotspots",
+        "nl": "Hotspots",
+        "de": "Hotspots"
+    },
+    "crd_brdg": {
+        "en": "Bridges",
+        "pt": "Bridges",
+        "es": "Puentes",
+        "fr": "Ponts",
+        "it": "Ponti",
+        "nl": "Bruggen",
+        "de": "Brücken"
+    },
+    "tbl_rptrs": {
+        "en": ".: Repeaters :.",
+        "pt": ".: Repetidores :.",
+        "es": ".: Repetidores :.",
+        "fr": ".: Répéteurs :.",
+        "it": ".: Ripetitori :.",
+        "nl": ".: Repeaters :.",
+        "de": ".: Repeater :."
+    },
+    "trpt_callsign": {
+        "en": "Callsign",
+        "pt": "Indicativo",
+        "es": "Indicativo",
+        "fr": "Indicatif",
+        "it": "Indicativo",
+        "nl": "Roepnaam",
+        "de": "Rufzeichen"
+    },
+    "trpt_id": {
+        "en": "ID",
+        "pt": "ID",
+        "es": "ID",
+        "fr": "ID",
+        "it": "ID",
+        "nl": "ID",
+        "de": "ID"
+    },
+    "trpt_loc": {
+        "en": "Location, locator",
+        "pt": "Localização, locator",
+        "es": "Ubicación, locator",
+        "fr": "Emplacement, locator",
+        "it": "Posizione, locator",
+        "nl": "Locatie, lokator",
+        "de": "Standort, Locator"
+    },
+    "trpt_contime": {
+        "en": "Time Connected",
+        "pt": "Tempo Conetado",
+        "es": "Tiempo Conectado",
+        "fr": "Temps Connecté",
+        "it": "Tempo di Connessione",
+        "nl": "Tijd aangesloten",
+        "de": "Verbindungszeit"
+    },
+    "trpt_slot": {
+        "en": "Slot",
+        "pt": "Slot",
+        "es": "Slot",
+        "fr": "Slot",
+        "it": "Slot",
+        "nl": "Slot",
+        "de": "Slot"
+    },
+    "trpt_src": {
+        "en": "Source",
+        "pt": "Origem",
+        "es": "Fuente",
+        "fr": "Source",
+        "it": "Sorgente",
+        "nl": "Oorsprong",
+        "de": "Quelle"
+    },
+    "trpt_dst": {
+        "en": "Destination",
+        "pt": "Destino",
+        "es": "Destino",
+        "fr": "Destination",
+        "it": "Destinazione",
+        "nl": "Bestemming",
+        "de": "Ziel"
+    },
+    "trpt_stctg": {
+        "en": "Static TG",
+        "pt": "TG Estático",
+        "es": "TG Estático",
+        "fr": "TG Statique",
+        "it": "TG Statico",
+        "nl": "TG Statisch",
+        "de": "Statischer TG"
+    },
+    "trpt_untg": {
+        "en": "Unique TG",
+        "pt": "TG Unico",
+        "es": "TG Único",
+        "fr": "TG Unique",
+        "it": "TG Unico",
+        "nl": "Alleenstaand TG",
+        "de": "Einzigartiger TG"
+    },
+    "trpt_to": {
+        "en": "T/O",
+        "pt": "T/O",
+        "es": "T/O",
+        "fr": "T/O",
+        "it": "T/O",
+        "nl": "T/O",
+        "de": "T/O"
+    },
+    "tbl_htspts": {
+        "en": ".: HotSpots :.",
+        "pt": ".: HotSpots :.",
+        "es": ".: HotSpots :.",
+        "fr": ".: HotSpots :.",
+        "it": ".: Hotspots :.",
+        "nl": ".: Hotspots :.",
+        "de": ".: Hotspots :."
+    },
+    "thtsp_callsign": {
+        "en": "Callsign",
+        "pt": "Indicativo",
+        "es": "Indicativo",
+        "fr": "Indicatif",
+        "it": "Indicativo",
+        "nl": "Roepnaam",
+        "de": "Rufzeichen"
+    },
+    "thtsp_id": {
+        "en": "ID",
+        "pt": "ID",
+        "es": "ID",
+        "fr": "ID",
+        "it": "ID",
+        "nl": "ID",
+        "de": "ID"
+    },
+    "thtsp_loc": {
+        "en": "Location, locator",
+        "pt": "Localização, locator",
+        "es": "Ubicación, locator",
+        "fr": "Emplacement, locator",
+        "it": "Posizione, locator",
+        "nl": "Locatie, lokator",
+        "de": "Standort, Locator"
+    },
+    "thtsp_contime": {
+        "en": "Time Connected",
+        "pt": "Tempo Conetado",
+        "es": "Tiempo Conectado",
+        "fr": "Temps Connecté",
+        "it": "Tempo di Connessione",
+        "nl": "Aangesloten tijd",
+        "de": "Verbindungszeit"
+    },
+    "thtsp_slot": {
+        "en": "Slot",
+        "pt": "Slot",
+        "es": "Slot",
+        "fr": "Slot",
+        "it": "Slot",
+        "nl": "Slot",
+        "de": "Slot"
+    },
+    "thtsp_src": {
+        "en": "Source",
+        "pt": "Origem",
+        "es": "Fuente",
+        "fr": "Source",
+        "it": "Sorgente",
+        "nl": "Oorsprong",
+        "de": "Quelle"
+    },
+    "thtsp_dst": {
+        "en": "Destination",
+        "pt": "Destino",
+        "es": "Destino",
+        "fr": "Destination",
+        "it": "Destinazione",
+        "nl": "Bestemming",
+        "de": "Ziel"
+    },
+    "thtsp_stctg": {
+        "en": "Static TG",
+        "pt": "TG Estático",
+        "es": "TG Estático",
+        "fr": "TG Statique",
+        "it": "TG Statico",
+        "nl": "Statisch TG",
+        "de": "Statischer TG"
+    },
+    "thtsp_untg": {
+        "en": "Unique TG",
+        "pt": "TG Unico",
+        "es": "TG Único",
+        "fr": "TG Unique",
+        "it": "TG Unico",
+        "nl": "Alleenstaand TG",
+        "de": "Einzigartiger TG"
+    },
+    "thtsp_to": {
+        "en": "T/O",
+        "pt": "T/O",
+        "es": "T/O",
+        "fr": "T/O",
+        "it": "T/O",
+        "nl": "T/O",
+        "de": "T/O"
+    },
+    "tbl_brdgs": {
+        "en": ".: Bridges :.",
+        "pt": ".: Bridges :.",
+        "es": ".: Puentes :.",
+        "fr": ".: Ponts :.",
+        "it": ".: Ponti :.",
+        "nl": ".: Bruggen :.",
+        "de": ".: Brücken :."
+    },
+    "tbrdg_callsign": {
+        "en": "Callsign",
+        "pt": "Indicativo",
+        "es": "Indicativo",
+        "fr": "Indicatif",
+        "it": "Indicativo",
+        "nl": "Roepnaam",
+        "de": "Rufzeichen"
+    },
+    "tbrdg_id": {
+        "en": "ID",
+        "pt": "ID",
+        "es": "ID",
+        "fr": "ID",
+        "it": "ID",
+        "nl": "ID",
+        "de": "ID"
+    },
+    "tbrdg_loc": {
+        "en": "Location, locator",
+        "pt": "Localização, locator",
+        "es": "Ubicación, locator",
+        "fr": "Emplacement, locator",
+        "it": "Posizione, locator",
+        "nl": "Locatie, lokator",
+        "de": "Standort, Locator"
+    },
+    "tbrdg_contime": {
+        "en": "Time Connected",
+        "pt": "Tempo Conetado",
+        "es": "Tiempo Conectado",
+        "fr": "Temps Connecté",
+        "it": "Tempo di Connessione",
+        "nl": "Aangesloten tijd",
+        "de": "Verbindungszeit"
+    },
+    "tbrdg_slot": {
+        "en": "Slot",
+        "pt": "Slot",
+        "es": "Slot",
+        "fr": "Slot",
+        "it": "Slot",
+        "nl": "Slot",
+        "de": "Slot"
+    },
+    "tbrdg_src": {
+        "en": "Source",
+        "pt": "Origem",
+        "es": "Fuente",
+        "fr": "Source",
+        "it": "Sorgente",
+        "nl": "Oorsprong",
+        "de": "Quelle"
+    },
+    "tbrdg_dst": {
+        "en": "Destination",
+        "pt": "Destino",
+        "es": "Destino",
+        "fr": "Destination",
+        "it": "Destinazione",
+        "nl": "Bestemming",
+        "de": "Ziel"
+    },
+    "tbrdg_stctg": {
+        "en": "Static TG",
+        "pt": "TG Estático",
+        "es": "TG Estático",
+        "fr": "TG Statique",
+        "it": "TG Statico",
+        "nl": "Statisch TG",
+        "de": "Statischer TG"
+    },
+    "tbrdg_untg": {
+        "en": "Unique TG",
+        "pt": "TG Unico",
+        "es": "TG Único",
+        "fr": "TG Unique",
+        "it": "TG Unico",
+        "nl": "Alleenstaand TG",
+        "de": "Einzigartiger TG"
+    },
+    "tbrdg_to": {
+        "en": "T/O",
+        "pt": "T/O",
+        "es": "T/O",
+        "fr": "T/O",
+        "it": "T/O",
+        "nl": "T/O",
+        "de": "T/O"
+    },
+    "tbl_srv": {
+        "en": ".: Services :.",
+        "pt": ".: Serviços :.",
+        "es": ".: Servicios :.",
+        "fr": ".: Services :.",
+        "it": ".: Servizi :.",
+        "nl": ".: Services :.",
+        "de": ".: Dienste :."
+    },
+    "tsrv_service": {
+        "en": "Service",
+        "pt": "Serviço",
+        "es": "Servicio",
+        "fr": "Service",
+        "it": "Servizio",
+        "nl": "Service",
+        "de": "Dienst"
+    },
+    "tsrv_mode": {
+        "en": "Mode",
+        "pt": "Modo",
+        "es": "Modo",
+        "fr": "Mode",
+        "it": "Modalità",
+        "nl": "Modus",
+        "de": "Modus"
+    },
+    "tsrv_callsign": {
+        "en": "Callsign",
+        "pt": "Indicativo",
+        "es": "Indicativo",
+        "fr": "Indicatif",
+        "it": "Indicativo",
+        "nl": "Roepnaam",
+        "de": "Rufzeichen"
+    },
+    "tsrv_id": {
+        "en": "ID",
+        "pt": "ID",
+        "es": "ID",
+        "fr": "ID",
+        "it": "ID",
+        "nl": "ID",
+        "de": "ID"
+    },
+    "tsrv_info": {
+        "en": "Info",
+        "pt": "Info",
+        "es": "Información",
+        "fr": "Info",
+        "it": "Informazioni",
+        "nl": "Informaties",
+        "de": "Info"
+    },
+    "tsrv_contime": {
+        "en": "Time Connected",
+        "pt": "Tempo Conetado",
+        "es": "Tiempo Conectado",
+        "fr": "Temps Connecté",
+        "it": "Tempo di Connessione",
+        "nl": "Aangesloten tijd",
+        "de": "Verbindungszeit"
+    },
+    "tsrv_trl": {
+        "en": "TX/RX/Lost",
+        "pt": "TX/RX/Perda",
+        "es": "TX/RX/Perdido",
+        "fr": "TX/RX/Perdu",
+        "it": "TX/RX/Perdita",
+        "nl": "TX/RX/Verloren",
+        "de": "TX/RX/Verlust"
+    },
+    "tsrv_slot": {
+        "en": "Slot",
+        "pt": "Slot",
+        "es": "Slot",
+        "fr": "Slot",
+        "it": "Slot",
+        "nl": "Slot",
+        "de": "Slot"
+    },
+    "tsrv_src": {
+        "en": "Source",
+        "pt": "Origem",
+        "es": "Fuente",
+        "fr": "Source",
+        "it": "Sorgente",
+        "nl": "Oorsprong",
+        "de": "Quelle"
+    },
+    "tsrv_dst": {
+        "en": "Destination",
+        "pt": "Destino",
+        "es": "Destino",
+        "fr": "Destination",
+        "it": "Destinazione",
+        "nl": "Bestemming",
+        "de": "Ziel"
+    },
+    "topb": {
+        "en": "OpenBridge Status",
+        "pt": "Estado das OpenBridge",
+        "es": "Estado de OpenBridge",
+        "fr": "État d'OpenBridge",
+        "it": "Stato di OpenBridge",
+        "nl": "OpenBrige-Status",
+        "de": "OpenBridge-Status"
+    },
+    "topb_opb": {
+        "en": "OpenBridge",
+        "pt": "OpenBridge",
+        "es": "OpenBridge",
+        "fr": "OpenBridge",
+        "it": "OpenBridge",
+        "nl": "OpenBridge",
+        "de": "OpenBridge"
+    },
+    "topb_netid": {
+        "en": "Net ID",
+        "pt": "ID Rede",
+        "es": "ID de Red",
+        "fr": "ID Réseau",
+        "it": "ID Rete",
+        "nl": "Netwerk ID",
+        "de": "Netz-ID"
+    },
+    "topb_act": {
+        "en": "Active QSO's",
+        "pt": "QSO's Ativos",
+        "es": "QSO's Activos",
+        "fr": "QSO Actifs",
+        "it": "QSO Attivi",
+        "nl": "Actieve QSOs",
+        "de": "Aktive QSOs"
+    },
+    "ttptg": {
+        "en": "TOP TG's",
+        "pt": "TOP TG's",
+        "es": "Top TG's",
+        "fr": "Top TG's",
+        "it": "Top TG's",
+        "nl": "Top TG's",
+        "de": "Top TG's"
+    },
+    "ttptg_tgid": {
+        "en": "TG ID",
+        "pt": "TG ID",
+        "es": "ID TG",
+        "fr": "ID TG",
+        "it": "ID TG",
+        "nl": "TG-ID",
+        "de": "TG-ID"
+    },
+    "ttptg_tgname": {
+        "en": "Talk Group Name",
+        "pt": "Nome do TG",
+        "es": "Nombre del Grupo de Conversación",
+        "fr": "Nom du Groupe de Discussion",
+        "it": "Nome del Talk Group",
+        "nl": "Talkgroep-Naam",
+        "de": "Talkgroup-Name"
+    },
+    "ttptg_tgqs": {
+        "en": "Number of QSO's",
+        "pt": "Numero de QSO's",
+        "es": "Número de QSO's",
+        "fr": "Nombre de QSO",
+        "it": "Numero di QSO",
+        "nl": "Aantal QSO's",
+        "de": "Anzahl der QSOs"
+    },
+    "ttptg_tottime": {
+        "en": "Total QSO Time",
+        "pt": "Tempo Total",
+        "es": "Tiempo Total de QSO",
+        "fr": "Temps Total de QSO",
+        "it": "Tempo Totale di QSO",
+        "nl": "Totale QSO tijd",
+        "de": "Gesamte QSO-Zeit"
+    },
+    "ttptg_topcall": {
+        "en": "Most Seen Callsign",
+        "pt": "Indicativos mais vistos",
+        "es": "Indicativo Más Visto",
+        "fr": "Indicatif le Plus Vu",
+        "it": "Indicativo più Visto",
+        "nl": "Meest bekeken Roepnaam",
+        "de": "Am häufigsten gesehener Rufzeichen"
+    },
+    "tbl_srvrs": {
+        "en": "World Servers",
+        "pt": "Servidores Mundiais",
+        "es": "Servidores Mundiales",
+        "fr": "Serveurs Mondiaux",
+        "it": "Server Mondiali",
+        "nl": "Wereldwijde Servers",
+        "de": "Weltweite Server"
+    },
+    "tsrvrs_country": {
+        "en": "Country",
+        "pt": "País",
+        "es": "País",
+        "fr": "Pays",
+        "it": "Paese",
+        "nl": "Land",
+        "de": "Land"
+    },
+    "tsrvrs_dmrid": {
+        "en": "ID",
+        "pt": "ID",
+        "es": "ID",
+        "fr": "ID",
+        "it": "ID",
+        "nl": "ID",
+        "de": "ID"
+    },
+    "tsrvrs_ipname": {
+        "en": "IP/Name",
+        "pt": "IP/Nome",
+        "es": "IP/Nombre",
+        "fr": "IP/Nom",
+        "it": "IP/Nome",
+        "nl": "IP/Naam",
+        "de": "IP/Name"
+    },
+    "tsrvrs_pass": {
+        "en": "Password",
+        "pt": "Palavra-passe",
+        "es": "Contraseña",
+        "fr": "Mot de passe",
+        "it": "Password",
+        "nl": "Wachtwoord",
+        "de": "Passwort"
+    },
+    "tsrvrs_port": {
+        "en": "Port",
+        "pt": "Porta",
+        "es": "Puerto",
+        "fr": "Port",
+        "it": "Porta",
+        "nl": "Port",
+        "de": "Port"
+    },
+    "tsrvrs_status": {
+        "en": "Status",
+        "pt": "Estado",
+        "es": "Estado",
+        "fr": "Statut",
+        "it": "Stato",
+        "nl": "Status",
+        "de": "Status"
+    },
+    "tbl_bridges": {
+        "en": "Bridges List",
+        "pt": "Lista de Bridges",
+        "es": "Lista de Puentes",
+        "fr": "Liste des Ponts",
+        "it": "Elenco Ponti",
+        "nl": "Bruggenlijst",
+        "de": "Brückenliste"
+    },
+    "tbrdgs_country": {
+        "en": "Country",
+        "pt": "País",
+        "es": "País",
+        "fr": "Pays",
+        "it": "Paese",
+        "nl": "Land",
+        "de": "Land"
+    },
+    "tbrdgs_tg": {
+        "en": "TG#",
+        "pt": "TG#",
+        "es": "TG#",
+        "fr": "TG#",
+        "it": "TG#",
+        "nl": "TG#",
+        "de": "TG#"
+    },
+    "tbrdgs_name": {
+        "en": "Name",
+        "pt": "Nome",
+        "es": "Nombre",
+        "fr": "Nom",
+        "it": "Nome",
+        "nl": "Naam",
+        "de": "Name"
+    },
+    "tbl_tgs": {
+        "en": "TalkGroups List",
+        "pt": "Lista de TalkGroups",
+        "es": "Lista de Grupos de Conversación",
+        "fr": "Liste des Groupes de Discussion",
+        "it": "Elenco dei TalkGroup",
+        "nl": "Talkgroepen-Lijst",
+        "de": "Talkgroup-Liste"
+    },
+    "tbltgs_numoftg": {
+        "en": "Number of TalkGroups:",
+        "pt": "Numero de TalkGroups:",
+        "es": "Número de TalkGroups:",
+        "fr": "Nombre de TalkGroups:",
+        "it": "Numero di TalkGroups:",
+        "nl": "Aantal TalkGroups:",
+        "de": "Anzahl der TalkGroups:"
+    },
+    "clc_title": {
+        "en": "Options Calculator",
+        "pt": "Calculador de Opções",
+        "es": "Calculadora de opciones",
+        "fr": "Calculateur d'options",
+        "it": "Calcolatore di opzioni",
+        "nl": "Opties berekenen",
+        "de": "Optionsrechner"
+    },
+    "calc_lout": {
+        "en": "Logout",
+        "pt": "Sair",
+        "es": "Cerrar sesión",
+        "fr": "Déconnexion",
+        "it": "Esci",
+        "nl": "Uitloggen",
+        "de": "Abmelden"
+    },
+    "calc_type": {
+        "en": "Select Type",
+        "pt": "Selecione Tipo",
+        "es": "Seleccionar tipo",
+        "fr": "Sélectionner le type",
+        "it": "Seleziona il tipo",
+        "nl": "Type selecteer",
+        "de": "Typ auswählen"
+    },
+    "calc_dev": {
+        "en": "Select Device",
+        "pt": "Selecionar Dispositivo",
+        "es": "Seleccionar Dispositivo",
+        "fr": "Sélectionner un Appareil",
+        "it": "Seleziona Dispositivo",
+        "nl": "Kies Apparaat",
+        "de": "Gerät auswählen"
+    },
+    "calc_addts1": {
+        "en": "Add TS1",
+        "pt": "Adicionar TS1",
+        "es": "Agregar TS1",
+        "fr": "Ajouter TS1",
+        "it": "Aggiungi TS1",
+        "nl": "TS1 toevoegen",
+        "de": "TS1 hinzufügen"
+    },
+    "calc_addts2": {
+        "en": "Add TS2",
+        "pt": "Adicionar TS2",
+        "es": "Agregar TS2",
+        "fr": "Ajouter TS2",
+        "it": "Aggiungi TS2",
+        "nl": "TS2 toevoegen",
+        "de": "TS2 hinzufügen"
+    },
+    "calc_dialtg": {
+        "en": "Dial-a-TG:",
+        "pt": "Marcar-TG:",
+        "es": "Marcar un TG:",
+        "fr": "Composer un TG :",
+        "it": "Digita un TG:",
+        "nl": "Kies TG:",
+        "de": "Wähle TG:"
+    },
+    "calc_voice": {
+        "en": "Voice Identification:",
+        "pt": "Identificação de Voz:",
+        "es": "Identificación de voz:",
+        "fr": "Identification vocale :",
+        "it": "Identificazione vocale:",
+        "nl": "Stemidentificatie:",
+        "de": "Sprachidentifikation:"
+    },
+    "calc_voiceon": {
+        "en": "On",
+        "pt": "Ligado",
+        "es": "Encendido",
+        "fr": "Activé",
+        "it": "Attivo",
+        "nl": "In",
+        "de": "Ein"
+    },
+    "calc_voiceoff": {
+        "en": "Off",
+        "pt": "Desligado",
+        "es": "Apagado",
+        "fr": "Désactivé",
+        "it": "Disattivo",
+        "nl": "Uit",
+        "de": "Aus"
+    },
+    "calc_voicesrv": {
+        "en": "Server default",
+        "pt": "Predefinição do servidor",
+        "es": "Predeterminado del servidor",
+        "fr": "Serveur par défaut",
+        "it": "Predefinito del server",
+        "nl": "Standaardserver",
+        "de": "Standardserver"
+    },
+    "calc_lang": {
+        "en": "Language:",
+        "pt": "Idioma:",
+        "es": "Idioma:",
+        "fr": "Langue :",
+        "it": "Lingua:",
+        "nl": "Taal",
+        "de": "Sprache:"
+    },
+    "calc_smode": {
+        "en": "Single Mode:",
+        "pt": "Modo Único:",
+        "es": "Modo individual:",
+        "fr": "Mode unique :",
+        "it": "Modalità singola:",
+        "nl": "Enkelvoudige modus:",
+        "de": "Einzelmodus:"
+    },
+    "calc_smodeon": {
+        "en": "On",
+        "pt": "Ligado",
+        "es": "Encendido",
+        "fr": "Activé",
+        "it": "Attivo",
+        "nl": "In",
+        "de": "Ein"
+    },
+    "calc_smodeoff": {
+        "en": "Off",
+        "pt": "Desligado",
+        "es": "Apagado",
+        "fr": "Désactivé",
+        "it": "Disattivo",
+        "nl": "Uit",
+        "de": "Aus"
+    },
+    "calc_smodesrv": {
+        "en": "Server default",
+        "pt": "Predefinição do servidor",
+        "es": "Predeterminado del servidor",
+        "fr": "Serveur par défaut",
+        "it": "Predefinito del server",
+        "nl": "Standaardserver",
+        "de": "Standardserver"
+    },
+    "calc_tgto": {
+        "en": "TG Timeout (min):",
+        "pt": "Lim. Tempo TG (min):",
+        "es": "Tiempo de espera del TG (min):",
+        "fr": "Délai d'expiration du TG (min) :",
+        "it": "Timeout del TG (min):",
+        "nl": "TG-Timeout (Minuten):",
+        "de": "TG-Timeout (Minuten):"
+    },
+    "calc_copy1": {
+        "en": "Copy to Clipboard",
+        "pt": "Copiar",
+        "es": "Copiar al portapapeles",
+        "fr": "Copier dans le presse-papiers",
+        "it": "Copia negli appunti",
+        "nl": "In klembord kopiëren",
+        "de": "In Zwischenablage kopieren"
+    },
+    "calc_copy2": {
+        "en": "Copy to Clipboard",
+        "pt": "Copiar",
+        "es": "Copiar al portapapeles",
+        "fr": "Copier dans le presse-papiers",
+        "it": "Copia negli appunti",
+        "nl": "In klembord kopiëren",
+        "de": "In Zwischenablage kopieren"
+    },
+    "calc_save": {
+        "en": "Save Changes",
+        "pt": "Gravar Alterações",
+        "es": "Guardar Cambios",
+        "fr": "Enregistrer les Modifications",
+        "it": "Salva Modifiche",
+        "nl": "Wijzigingen opslaan",
+        "de": "Änderungen speichern"
+    },
+    "calc_wait": {
+        "en": "Applying settings ...",
+        "pt": "Aplicando configurações ...",
+        "es": "Aplicando ajustes ...",
+        "fr": "Application des paramètres ...",
+        "it": "Applicazione delle impostazioni ...",
+        "nl": "Instellingen toepassen ...",
+        "de": "Einstellungen werden angewendet ..."
+    },
+    "calchlptype": {
+        "en": "Duplex Hotspots and Repeaters can use TS1 and/or TS2<br>Simplex Hotspots can only use TS2",
+        "pt": "HotSpots com duplex ou repetidores devem utilizar TS1 e/ou TS2<br>HotSpots Simplex só devem utilizar TS2",
+        "es": "Los Hotspots dúplex y los repetidores pueden usar TS1 y/o TS2<br>Los Hotspots simplex solo pueden usar TS2",
+        "fr": "Les hotspots duplex et les répéteurs peuvent utiliser TS1 et/ou TS2<br>Les hotspots simplex ne peuvent utiliser que TS2",
+        "it": "Gli hotspot duplex e i ripetitori possono utilizzare TS1 e/o TS2<br>Gli hotspot simplex possono utilizzare solo TS2",
+        "nl": "Duplex hotspots en repeaters kunnen TS1 en/of TS2 gebruiken<br>Simplex hotspots kunnen alleen TS2 gebruiken",
+        "de": "Duplex-Hotspots und Repeaters können TS1 und/oder TS2 verwenden<br>Einfachex-Hotspots können nur TS2 verwenden"
+    },
+    "calchlpts1": {
+        "en": "Set Statics you want on Slot 1.<br>You can not have the same Talk Group set as static on Slot 1 or Slot 2.",
+        "pt": "Configure os estáticos que deseja no Slot 1.<br>Não é possível ter o mesmo Grupo de Conversação configurado como estático no Slot 1 ou no Slot 2.",
+        "es": "Configura los estáticos que deseas en la Ranura 1.<br>No puedes tener el mismo Grupo de Conversación configurado como estático en la Ranura 1 o en la Ranura 2.",
+        "fr": "Définissez les statiques que vous souhaitez sur la fente 1.<br>Vous ne pouvez pas avoir le même groupe de discussion défini en statique sur la fente 1 ou la fente 2.",
+        "it": "Imposta gli statici desiderati sulla Slot 1.<br>Non puoi avere lo stesso gruppo di conversazione impostato come statico sulla Slot 1 o sulla Slot 2.",
+        "nl": "Definieer de statische gegevens die u wilt op sleuf 1.<br>U kunt niet dezelfde nieuwsgroep als statisch gedefinieerd hebben op sleuf 1 of sleuf 2.",
+        "de": "Legen Sie die gewünschten Statistiken auf Slot 1 fest.<br>Sie können dieselbe Gesprächsgruppe nicht als statisch auf Slot 1 oder Slot 2 festlegen."
+    },
+    "calchlpts2": {
+        "en": "Set Statics you want on Slot 2.<br>You can not have the same Talk Group set as static on Slot 1 or Slot 2.",
+        "pt": "Configure os estáticos que deseja no Slot 2.<br>Não é possível ter o mesmo Grupo de Conversação configurado como estático no Slot 1 ou no Slot 2.",
+        "es": "Configura los estáticos que deseas en la Ranura 2.<br>No puedes tener el mismo Grupo de Conversación configurado como estático en la Ranura 1 o en la Ranura 2.",
+        "fr": "Définissez les statiques que vous souhaitez sur la fente 2.<br>Vous ne pouvez pas avoir le même groupe de discussion défini en statique sur la fente 1 ou la fente 2.",
+        "it": "Imposta gli statici desiderati sulla Slot 2.<br>Non puoi avere lo stesso gruppo di conversazione impostato come statico sulla Slot 1 o sulla Slot 2.",
+        "nl": "Definieer de statische gegevens die u wilt op sleuf 2.<br>U kunt niet dezelfde nieuwsgroep als statisch gedefinieerd hebben op slot 1 of slot 2.",
+        "de": "Legen Sie die gewünschten Statistiken auf Slot 2 fest.<br>Sie können dieselbe Gesprächsgruppe nicht als statisch auf Slot 1 oder Slot 2 festlegen."
+    },
+    "calchlpdtg": {
+        "en": "0=None. Set default Enhanced Talk Groups (Dial-a-TG) TG9 Slot 2.<br>Only One Talk Group can be entered in this section.",
+        "pt": "0=Nenhum. Defina o padrão dos Grupos de Conversação Avançados (Dial-a-TG) para TG9 no Slot 2.<br>Apenas um Grupo de Conversação pode ser inserido nesta seção.",
+        "es": "0=Ninguno. Establece los Grupos de Conversación Mejorados predeterminados (Dial-a-TG) TG9 Ranura 2.<br>Solo se puede ingresar un Grupo de Conversación en esta sección.",
+        "fr": "0=Aucun. Définissez les groupes de discussion améliorés par défaut (Dial-a-TG) TG9 Fente 2.<br>Seul un groupe de discussion peut être saisi dans cette section.",
+        "it": "0=Nessuno. Imposta i Gruppi di Conversazione Avanzati predefiniti (Dial-a-TG) TG9 Slot 2.<br>In questa sezione può essere inserito solo un Gruppo di Conversazione.",
+        "nl": "0=Geen. Standaard verbeterde nieuwsgroepen instellen (Dial-a-TG) TG9 Slot 2.<br>In dit gedeelte kan slechts één nieuwsgroep worden ingevoerd.",
+        "de": "0=Keine. Legen Sie die Standard-Erweiterten Gesprächsgruppen (Dial-a-TG) TG9 Slot 2 fest.<br>Nur eine Gesprächsgruppe kann in diesem Abschnitt eingegeben werden."
+    },
+    "calchlpvoice": {
+        "en": "15 minute Voice Ident can be set ON or OFF on Time Slot 2.<br>Radios will RX from the network, 'This is CALL-SIGN FreeDMR.'",
+        "pt": "A identificação de voz a cada 15 minutos pode ser ativada ou desativada no Time Slot 2.<br>Os rádios receberão da rede a mensagem: 'Este é o INDICATIVO FreeDMR.'",
+        "es": "Se puede activar o desactivar la identificación de voz cada 15 minutos en la Ranura 2.<br>Las radios recibirán de la red, 'Este es CALL-SIGN FreeDMR.'",
+        "fr": "L'identification vocale toutes les 15 minutes peut être activée ou désactivée sur la fente 2.<br>Les radios recevront du réseau, 'Ceci est CALL-SIGN FreeDMR.'",
+        "it": "L'identificativo vocale ogni 15 minuti può essere attivato o disattivato sulla Slot 2.<br>Le radio riceveranno dalla rete, 'Questa è l'INDICATIVO FreeDMR.'",
+        "nl": "Stemidentificatie om de 15 minuten kan worden in- of uitgeschakeld op slot 2.<br>Radio's ontvangen van het netwerk, 'Dit is CALL-SIGN FreeDMR'.",
+        "de": "Die 15-minütige Sprachidentifikation kann auf Slot 2 ein- oder ausgeschaltet werden.<br>Funkgeräte empfangen vom Netzwerk die Nachricht 'Dies ist der Rufzeichen FreeDMR.'"
+    },
+    "calchlplang": {
+        "en": "Set the Language VOICE comes back to you as.",
+        "pt": "Defina o idioma em que a VOZ retorna para você.",
+        "es": "Establece el idioma en el que la VOZ te responde.",
+        "fr": "Définissez la langue dans laquelle la VOIX vous répond.",
+        "it": "Imposta la lingua in cui la VOCE ti risponde.",
+        "nl": "Stel de taal in waarin de VOICE u antwoordt",
+        "de": "Legen Sie die Sprache fest, in der die STIMME Ihnen antwortet."
+    },
+    "calchlpsmode": {
+        "en": "Only allows a single Talk Group to be routed to a Time Slot on a repeater/hotspot at one time.",
+        "pt": "Permite apenas que um único Grupo de Conversação seja roteado para um Time Slot em um repetidor/hotspot por vez.",
+        "es": "Solo permite que un único Grupo de Conversación se enlace a una Ranura de tiempo en un repetidor/punto de acceso a la vez.",
+        "fr": "Permet uniquement un seul groupe de discussion d'être routé vers une fente temporelle sur un répéteur/hotspot à la fois.",
+        "it": "Consente solo un singolo Gruppo di Conversazione di essere instradato su una Slot temporale in un ripetitore/hotspot alla volta.",
+        "nl": "Hiermee kan slechts één praatgroep tegelijk naar een tijdslot op een repeater/hotspot worden geleid.",
+        "de": "Erlaubt nur, dass eine einzelne Gesprächsgruppe zu einem Zeitfenster auf einem Repeater/Hotspot geleitet wird."
+    },
+    "calchlpstgto": {
+        "en": "Time a Talk Group is held active for. Pressing your PTT on a Talk Group reset this timer.<br>You select any number of minutes you like here. But the recommended time is 10 or 5 mins.<br>If setting more than two static to a slot, you might wish to set Timer to 1 or 2 min.",
+        "pt": "Tempo em que um Grupo de Conversação permanece ativo. Pressionar o botão PTT em um Grupo de Conversação reinicia esse temporizador.<br>Você pode selecionar qualquer número de minutos aqui. Mas o tempo recomendado é de 10 ou 5 minutos.<br>Se estiver configurando mais de dois estáticos para um slot, talvez deseje definir o temporizador para 1 ou 2 minutos.",
+        "es": "Tiempo en que un Grupo de Conversación se mantiene activo. Presionar el PTT en un Grupo de Conversación reinicia este temporizador.<br>Puedes seleccionar cualquier cantidad de minutos que desees aquí. Pero el tiempo recomendado es de 10 o 5 minutos.<br>Si configuras más de dos estáticos en una ranura, es posible que desees establecer el temporizador en 1 o 2 minutos.",
+        "fr": "Durée pendant laquelle un groupe de discussion est maintenu actif. Appuyer sur le PTT d'un groupe de discussion réinitialise cette minuterie.<br>Vous pouvez sélectionner le nombre de minutes que vous souhaitez ici. Mais le temps recommandé est de 10 ou 5 minutes.<br>Si vous configurez plus de deux statiques sur une fente, vous voudrez peut-être régler la minuterie sur 1 ou 2 minutes.",
+        "it": "Tempo per cui un Gruppo di Conversazione rimane attivo. Premendo il PTT su un Gruppo di Conversazione si resetta questo timer.<br>Puoi selezionare qui il numero di minuti che desideri. Ma il tempo consigliato è di 10 o 5 minuti.<br>Se stai impostando più di due statici su una slot, potresti desiderare di impostare il timer su 1 o 2 minuti.",
+        "nl": "Tijdsduur dat een talkgroep actief wordt gehouden. Door op de PTT van een nieuwsgroep te drukken, wordt deze timer gereset.<br>U kunt hier het aantal minuten dat u wilt selecteren. Maar de aanbevolen tijd is 10 of 5 minuten.<br> Als u meer dan twee statische TG op een slot instelt, wilt u de timer mogelijk op 1 of 2 minuten instellen.",
+        "de": "Zeit, in der eine Gesprächsgruppe aktiv gehalten wird. Durch Drücken der PTT-Taste auf einer Gesprächsgruppe wird dieser Timer zurückgesetzt.<br>Sie können hier beliebig viele Minuten auswählen. Die empfohlene Zeit beträgt jedoch 10 oder 5 Minuten.<br>Wenn Sie mehr als zwei Statische einer Slot zuweisen, möchten Sie möglicherweise den Timer auf 1 oder 2 Minuten einstellen."
+    },
+    "sslog_call": {
+        "en": "Callsign",
+        "pt": "Indicativo",
+        "es": "Indicativo",
+        "fr": "Indicatif",
+        "it": "Indicativo",
+        "nl": "Roepnaam",
+        "de": "Rufzeichen"
+    },
+    "sslog_pass": {
+        "en": "Password",
+        "pt": "Palavra-passe",
+        "es": "Contraseña",
+        "fr": "Mot de passe",
+        "it": "Password",
+        "nl": "Wachtwoord",
+        "de": "Passwort"
+    },
+    "sslog_login": {
+        "en": "Login",
+        "pt": "Entrar",
+        "es": "Iniciar sesión",
+        "fr": "Connexion",
+        "it": "Accesso",
+        "nl": "Inloggen",
+        "de": "Anmelden"
+    },
+    "sslog_use": {
+        "en": "*** USAGE ***",
+        "pt": "*** UTILIZAÇÃO ***",
+        "es": "*** USO ***",
+        "fr": "*** UTILISATION ***",
+        "it": "*** USO ***",
+        "nl": "*** GEBRUIK ***",
+        "de": "*** VERWENDUNG ***"
+    },
+    "sslog_instruc": {
+        "en": "In order to manage your device with Self Service, you may need to remove all options in your device's software and set your password using PASS=your_password.",
+        "pt": "Para gerir o seu dispositivo com o Self Service, pode ser necessário remover todas as opções no software do seu dispositivo e definir a sua senha usando PASS=sua_senha.",
+        "es": "Para gestionar su dispositivo con Self Service, es posible que necesite eliminar todas las opciones en el software de su dispositivo y establecer su contraseña utilizando PASS=your_password.",
+        "fr": "Pour gérer votre appareil avec Self Service, vous devrez peut-être supprimer toutes les options dans le logiciel de votre appareil et définir votre mot de passe en utilisant PASS=your_password.",
+        "it": "Per gestire il tuo dispositivo con Self Service, potresti dover rimuovere tutte le opzioni nel software del tuo dispositivo e impostare la tua password utilizzando PASS=your_password.",
+        "nl": "Om uw apparaat te beheren met Self Service, moet u mogelijk alle opties in de software van uw apparaat verwijderen en uw wachtwoord instellen met PASS=your_password",
+        "de": "Um Ihr Gerät mit Self Service zu verwalten, müssen Sie möglicherweise alle Optionen in der Software Ihres Geräts entfernen und Ihr Passwort mit PASS=your_password festlegen."
+    }
+}

@@ -1,0 +1,82 @@
+{% if _table|length > 0 %}
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header border-transparent">
+        <h3 class="card-title" id="lh_tbl"></h3>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table m-0 table-striped table-sm">
+            <thead>
+              <tr>
+                <th style="width: 105px;" id="lh_date"></th>
+                <th id="lh_time"></th>
+                <th style="width: 150px;" id="lh_callsignid"></th>
+                <th id="lh_name"></th>
+                <th id="lh_tgnum"></th>
+                <th id="lh_tgname"></th>
+                <th style="width: 60px;">TX</th>
+                <th id="lh_system"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for itm in _table %}
+              <tr>
+                <td>{{ itm[0][:10] }}</td>
+                <td>{{ itm[0][11:] }}</td>
+                {% if not itm[7] %}
+                <td><b>{{ itm[6] }}</b></td>
+                <td></td>
+                {% else %}
+                <td><b><a target="_blank" href=https://qrz.com/db/{{itm[7][0]}}>{{ itm[7][0] }}</a></b><span>&nbsp;({{
+                    itm[6] }})</span></td>
+                <td><b>{{ itm[7][1] }}</b></td>
+                {% endif %}
+                <td class="text-warning"><b>{{ itm[4] }}</b></td>
+                <td>
+                  {% set tgnum = itm[4]|safe %}
+                  {% if tgnum|length > 2 %}
+                  {% set ctrynum = tgnum[0:3] %}
+                  <img src="/flags/{{ ctrynum }}.png">
+                  {% else %}
+                  <img src="/flags/world.png">
+                  {% endif %}
+                  <b>&nbsp;{{ '' if not itm[5] else itm[5]|safe }}&nbsp;</b>
+                  {% set tgname = itm[5]|safe %}
+                  {% if 'fcs' in tgname.lower() or 'ysf' in tgname.lower() or 'wiresx' in tgname.lower() %}
+                  <img src="/flags/yaesu.png" alt="Yaesu System Fusion">
+                  {% endif %}
+                  {% if 'echo' in tgname.lower() or 'echolink' in tgname.lower() %}
+                  <img src="/flags/echolink.png" alt="Echolink">
+                  {% endif %}
+                  {% if 'asl' in tgname.lower() or 'allstar' in tgname.lower() or 'allstarlink' in tgname.lower() %}
+                  <img src="/flags/allstar.png" alt="AllStarLink">
+                  {% endif %}
+                  {% if 'tetra' in tgname.lower() %}
+                  <img src="/flags/tetra.png" alt="Tetra">
+                  {% endif %}
+                  {% if 'd*' in tgname.lower() or 'dstar' in tgname.lower() or 'xlx' in tgname.lower() or 'multiprotocol' in tgname.lower() or 'multi protocol' in tgname.lower() or 'multi-protocol' in tgname.lower() %}
+                  <img src="/flags/dstar.png" alt="XLX">
+                  {% endif %}
+                  {% if 'm17' in tgname.lower() %}
+                  <img src="/flags/m17.png" alt="M17">
+                  {% endif %}
+                </td>
+                <td>{{ 'DATA' if not itm[1] else itm[1]|int }}</td>
+                <td>{{ itm[3] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="preloader flex-column justify-content-center align-items-center">
+  <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+  <span class="info-box-text" id="pre_wait"></span>
+</div>
+{% endif %}
