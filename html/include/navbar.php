@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-dark text-sm">
+<nav class="main-header navbar navbar-expand-lg navbar-light navbar-dark text-sm">
     <div class="container text-nowrap">
         <a href="#" class="navbar-brand">
             <img src="img/Logo_mini.png" alt="FreeDMR" class="brand-image img-circle elevation-3"
