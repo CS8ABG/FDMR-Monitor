@@ -97,9 +97,9 @@ emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==Fal
                       {% set idnum = _client|safe %}
                       {% if idnum|length > 2 %}
                       {% set ctrynum = idnum[0:3] %}
-                      <img src="/flags/{{ ctrynum }}.png">
+                      <img src="./flags/{{ ctrynum }}.png">
                       {% else %}
-                      <img src="/flags/world.png">
+                      <img src="./flags/world.png">
                       {% endif %}
                       <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}"
                         data-toggle="tooltip" data-html="true" title="
@@ -222,9 +222,9 @@ Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
                     {% set idnum = _client|safe %}
                     {% if idnum|length > 2 %}
                     {% set ctrynum = idnum[0:3] %}
-                    <img src="/flags/{{ ctrynum }}.png">
+                    <img src="./flags/{{ ctrynum }}.png">
                     {% else %}
-                    <img src="/flags/world.png">
+                    <img src="./flags/world.png">
                     {% endif %}
                     <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}" data-toggle="tooltip"
                           data-html="true" title="
@@ -346,9 +346,9 @@ Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
                     {% set idnum = _client|safe %}
                     {% if idnum|length > 2 %}
                     {% set ctrynum = idnum[0:3] %}
-                    <img src="/flags/{{ ctrynum }}.png">
+                    <img src="./flags/{{ ctrynum }}.png">
                     {% else %}
-                    <img src="/flags/world.png">
+                    <img src="./flags/world.png">
                     {% endif %}
                     <span><b><a target="_blank" href="https://qrz.com/db/{{ _cdata['CALLSIGN']}}" data-toggle="tooltip"
                           data-html="true" title="
