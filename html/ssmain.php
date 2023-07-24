@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="plugins/adminlte/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode layout-top-nav layout-navbar-fixed text-sm">
+<body class="hold-transition dark-mode layout-top-nav layout-navbar-fixed text-sm layout-footer-fixed" style="zoom: 85%;">
     <div class="wrapper">
         <?php if ($display_preloader): ?>
         <div class="preloader flex-column justify-content-center align-items-center">
