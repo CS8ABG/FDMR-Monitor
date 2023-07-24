@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <a href="#">Self Service</a>
               </div>
               <div class="card">
-                <div class="card-body login-card-body">
+                <div class="card-body">
                   <!-- <p class="login-box-msg">Iniciar Sessão</p> -->
                   <?php if (isset($errorMsg)): ?>
                   <p class="text-center">

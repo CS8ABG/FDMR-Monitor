@@ -61,7 +61,7 @@
   </div>
 {% endif %}
 
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-lg-3 col-6">
     <div class="small-box bg-info">
       <div class="inner">
@@ -73,7 +73,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-3 col-6">
     <div class="small-box bg-success">
       <div class="inner">
@@ -85,7 +84,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
@@ -97,7 +95,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-3 col-6">
     <div class="small-box bg-danger">
       <div class="inner">
@@ -325,6 +322,7 @@
 <!-- Connected systems -->
 {% if _table['MASTERS']|length >0 %}
 <div class="row justify-content-center">
+  {% if countrepeaters.value > 0 %}
   <div class="col-md-4 col-12">
     <div class="card">
       <div class="card-header">
@@ -357,6 +355,8 @@ Tempo Conetado: {{ _cdata['CONNECTED'] }}"><b>{{_cdata['CALLSIGN']}}</b></a>&nbs
       </div>
     </div>
   </div>
+  {% endif %}
+  {% if counthotspots.value > 0 %}
   <div class="col-md-4 col-12">
     <div class="card">
       <div class="card-header">
@@ -389,6 +389,8 @@ Tempo Conetado: {{ _cdata['CONNECTED'] }}"><b>{{_cdata['CALLSIGN']}}</b></a>&nbs
       </div>
     </div>
   </div>
+  {% endif %}
+  {% if countbridges.value > 0 %}
   <div class="col-md-4 col-12">
     <div class="card">
       <div class="card-header">
@@ -421,5 +423,6 @@ Tempo Conetado: {{ _cdata['CONNECTED'] }}"><b>{{_cdata['CALLSIGN']}}</b></a>&nbs
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 {% endif %}
