@@ -333,7 +333,7 @@
           {% for _master in _table['MASTERS'] %}
           {% if _table['MASTERS'][_master]['PEERS']|length >0 %}
           {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-          {% if _client < 900000 %} <a target="_blank" href="https://qrz.com/db/{{_cdata['CALLSIGN']}}"
+          {% if _client|string|length == 6 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %} <a target="_blank" href="https://qrz.com/db/{{_cdata['CALLSIGN']}}"
             class="badge badge-pill badge-success" style="width: 56px;" data-toggle="tooltip" data-placement="top"
             title="
 ID DMR: {{ _client }}
@@ -367,7 +367,7 @@ Tempo Conetado: {{ _cdata['CONNECTED'] }}"><b>{{_cdata['CALLSIGN']}}</b></a>&nbs
           {% for _master in _table['MASTERS'] %}
           {% if _table['MASTERS'][_master]['PEERS']|length >0 %}
           {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-          {% if _client > 999999 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+          {% if _client|string|length >= 7 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
           <a target="_blank" href="https://qrz.com/db/{{_cdata['CALLSIGN']}}" class="badge badge-pill badge-success"
             style="width: 56px;" data-toggle="tooltip" data-placement="top" data-html="true" title="
 ID DMR: {{ _client }}
