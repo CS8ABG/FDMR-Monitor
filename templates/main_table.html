@@ -7,10 +7,10 @@
 {% if _table['MASTERS']|length >0 %}
   {% for _master in _table['MASTERS'] %}
     {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-      {% if _client < 900000 %}
+      {% if _client|string|length == 6 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
         {% set countrepeaters.value = countrepeaters.value + 1 %}
       {% endif %}
-      {% if _client > 999999 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+      {% if _client|string|length >= 7 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
         {% set counthotspots.value = counthotspots.value + 1 %}
       {% endif %}
       {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}

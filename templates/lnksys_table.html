@@ -8,8 +8,10 @@
 {% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0) and
 emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
 {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-{% if _client < 900000 %} {% set countrepeaters.value=countrepeaters.value + 1 %} {% endif %} {% if _client> 999999 and
-  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+{% if _client|string|length == 6 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %} 
+  {% set countrepeaters.value=countrepeaters.value + 1 %} 
+{% endif %} 
+{% if _client|string|length >= 7 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
   {% set counthotspots.value = counthotspots.value + 1 %}
   {% endif %}
   {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
@@ -91,7 +93,7 @@ emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==Fal
                 and
                 emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
                 {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-                {% if _client < 900000 %} 
+                {% if _client|string|length == 6 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %} 
                   <tr>
                     <td>
                       {% set idnum = _client|safe %}
@@ -216,7 +218,7 @@ Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
                 {% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0)
                 and emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
                 {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-                {% if _client > 999999 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+                {% if _client|string|length >= 7 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
                 <tr>
                   <td>
                     {% set idnum = _client|safe %}
