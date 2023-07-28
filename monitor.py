@@ -462,6 +462,26 @@ def add_hb_peer(_peer_conf, _ctable_loc, _peer):
     else:
         _ctable_peer["COLORCODE"] = _peer_conf["COLORCODE"]
 
+    if str(type(_peer_conf["TX_POWER"])).find("bytes") != -1:
+        _ctable_peer["TX_POWER"] = _peer_conf["TX_POWER"].decode("utf-8").strip()
+    else:
+        _ctable_peer["TX_POWER"] = _peer_conf["TX_POWER"]
+
+    if str(type(_peer_conf["LATITUDE"])).find("bytes") != -1:
+        _ctable_peer["LATITUDE"] = _peer_conf["LATITUDE"].decode("utf-8").strip()
+    else:
+        _ctable_peer["LATITUDE"] = _peer_conf["LATITUDE"]
+
+    if str(type(_peer_conf["LONGITUDE"])).find("bytes") != -1:
+        _ctable_peer["LONGITUDE"] = _peer_conf["LONGITUDE"].decode("utf-8").strip()
+    else:
+        _ctable_peer["LONGITUDE"] = _peer_conf["LONGITUDE"]
+
+    if str(type(_peer_conf["HEIGHT"])).find("bytes") != -1:
+        _ctable_peer["HEIGHT"] = _peer_conf["HEIGHT"].decode("utf-8").strip()
+    else:
+        _ctable_peer["HEIGHT"] = _peer_conf["HEIGHT"]
+
     _ctable_peer["CONNECTION"] = _peer_conf["CONNECTION"]
     _ctable_peer["CONNECTED"] = time_str(_peer_conf["CONNECTED"], "since")
 
