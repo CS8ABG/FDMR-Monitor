@@ -10,12 +10,12 @@
               <table class="table m-0 table-striped table-sm">
                 <thead>
                   <tr>
-                    <th id="tsrvrs_country">País</th>
-                    <th id="tsrvrs_dmrid">DMR-ID</th>
-                    <th id="tsrvrs_ipname">IP/Nome</th>
-                    <th id="tsrvrs_pass">Palavra-passe</th>
-                    <th id="tsrvrs_port">Porta</th>
-                    <th id="tsrvrs_status">Estado</th>
+                    <th id="tsrvrs_country"></th>
+                    <th id="tsrvrs_dmrid"></th>
+                    <th id="tsrvrs_ipname"></th>
+                    <th id="tsrvrs_pass"></th>
+                    <th id="tsrvrs_port"></th>
+                    <th id="tsrvrs_status"></th>
                   </tr>
                 </thead>
                 <tbody>
