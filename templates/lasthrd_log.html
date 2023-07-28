@@ -29,7 +29,9 @@
                 <td><b>{{ itm[6] }}</b></td>
                 <td></td>
                 {% else %}
-                <td><b><a target="_blank" href=https://qrz.com/db/{{itm[7][0]}}>{{ itm[7][0] }}</a></b><span>&nbsp;({{
+                {% set idnum = itm[6]|safe %}
+                {% set ctryusr = idnum[0:3] %}
+                <td><img src="/flags/{{ ctryusr }}.png" onerror="this.src='/flags/world.png'">&nbsp;<b><a target="_blank" href=https://qrz.com/db/{{itm[7][0]}}>{{ itm[7][0] }}</a></b><span>&nbsp;({{
                     itm[6] }})</span></td>
                 <td><b>{{ itm[7][1] }}</b></td>
                 {% endif %}
@@ -38,7 +40,7 @@
                   {% set tgnum = itm[4]|safe %}
                   {% if tgnum|length > 2 %}
                   {% set ctrynum = tgnum[0:3] %}
-                  <img src="/flags/{{ ctrynum }}.png">
+                  <img src="/flags/{{ ctrynum }}.png" onerror="this.src='/flags/world.png'">
                   {% else %}
                   <img src="/flags/world.png">
                   {% endif %}

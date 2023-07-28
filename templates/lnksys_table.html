@@ -3,25 +3,19 @@
 {% set counthotspots = namespace(value=0) %}
 {% set countbridges = namespace(value=0) %}
 
-{% if _table['MASTERS']|length > 0 %}
 {% for _master in _table['MASTERS'] %}
-{% if ((_table['MASTERS'][_master]['PEERS']|length==0 or _table['MASTERS'][_master]['PEERS']|length>0) and
-emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==False) %}
-{% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
-{% if _client|string|length == 6 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %} 
-  {% set countrepeaters.value=countrepeaters.value + 1 %} 
-{% endif %} 
-{% if _client|string|length >= 7 and  _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
-  {% set counthotspots.value = counthotspots.value + 1 %}
-  {% endif %}
-  {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
-  {% set countbridges.value = countbridges.value + 1 %}
-  {% endif %}
+  {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+    {% if _client|string|length == 6 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %} 
+      {% set countrepeaters.value = countrepeaters.value + 1 %} 
+    {% elif _client|string|length >= 7 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
+      {% set counthotspots.value = counthotspots.value + 1 %}
+    {% elif _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
+      {% set countbridges.value = countbridges.value + 1 %}
+    {% endif %}
   {% endfor %}
-  {% endif %}
-  {% endfor %}
+{% endfor %}
 
-  {% else %}
+  {% if _table['MASTERS']|length == 0 %}
   <div class="preloader flex-column justify-content-center align-items-center">
     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
     <span class="info-box-text" id="pre_wait"></span>
@@ -99,7 +93,7 @@ emaster==True) or (_table['MASTERS'][_master]['PEERS']|length>0 and emaster==Fal
                       {% set idnum = _client|safe %}
                       {% if idnum|length > 2 %}
                       {% set ctrynum = idnum[0:3] %}
-                      <img src="/flags/{{ ctrynum }}.png">
+                      <img src="/flags/{{ ctrynum }}.png" onerror="this.src='/flags/world.png'">
                       {% else %}
                       <img src="/flags/world.png">
                       {% endif %}
@@ -224,7 +218,7 @@ Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
                     {% set idnum = _client|safe %}
                     {% if idnum|length > 2 %}
                     {% set ctrynum = idnum[0:3] %}
-                    <img src="/flags/{{ ctrynum }}.png">
+                    <img src="/flags/{{ ctrynum }}.png" onerror="this.src='/flags/world.png'">
                     {% else %}
                     <img src="/flags/world.png">
                     {% endif %}
@@ -348,7 +342,7 @@ Equipamento: {{_cdata['PACKAGE_ID'] }}">{{ _cdata['CALLSIGN']}}</a></b>&nbsp;
                     {% set idnum = _client|safe %}
                     {% if idnum|length > 2 %}
                     {% set ctrynum = idnum[0:3] %}
-                    <img src="/flags/{{ ctrynum }}.png">
+                    <img src="/flags/{{ ctrynum }}.png" onerror="this.src='/flags/world.png'">
                     {% else %}
                     <img src="/flags/world.png">
                     {% endif %}

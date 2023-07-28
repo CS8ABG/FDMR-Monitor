@@ -25,7 +25,7 @@
                         {% set tgnum = itm[0]|safe  %}
                         {% if tgnum|length > 2 %}
                         {% set ctrynum = tgnum[0:3]  %}
-                        <img src="/flags/{{ ctrynum }}.png">
+                        <img src="/flags/{{ ctrynum }}.png" onerror="this.src='/flags/world.png'">
                         {% else %}
                         <img src="/flags/world.png">
                         {% endif %}
@@ -65,6 +65,6 @@
 {% else %}
   <div class="preloader flex-column justify-content-center align-items-center">
     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-    <span class="info-box-text">Aguardando informa&ccedil;&atilde;o do Servidor...</span>
+    <span class="info-box-text" id="pre_wait"></span>
   </div>
 {% endif %}
