@@ -1,5 +1,4 @@
 <?php
-include 'config.php';
 // Authenticate User
 function authenticateUser($username, $password)
 {
@@ -40,6 +39,8 @@ function checkSessionTimeout()
 // Connect to the database
 function connectDatabase()
 {
+    $configFile = '../fdmr-mon.cfg';
+    $config = parse_ini_file($configFile, true);
     $dbServer = $config['SELF SERVICE']['DB_SERVER'];
     $dbUsername = $config['SELF SERVICE']['DB_USERNAME'];
     $dbPassword = $config['SELF SERVICE']['DB_PASSWORD'];
