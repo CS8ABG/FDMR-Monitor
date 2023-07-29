@@ -5,3 +5,4 @@
 *.db
 fdmr-mon.cfg
 venv
+proxy/proxy.cfg
