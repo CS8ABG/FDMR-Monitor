@@ -51,29 +51,82 @@
                         </li> -->
                     </ul>
                 </li>
+                <?php
+                if (isset($config['DASHBOARD']['NAV_LNK_NAME']) && !empty($config['DASHBOARD']['NAV_LNK_NAME'])) {
+                    $linksDropdownName = $config['DASHBOARD']['NAV_LNK_NAME'];
+                    echo '<li class="nav-item dropdown dropdown-hover">';
+                    echo '<a id="dropdownSubMenu1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">';
+                    echo '<span>' . $linksDropdownName . '</span></a>';
+                    echo '<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">';
+                    for ($i = 1; isset($config['DASHBOARD']['LINK' . $i]); $i++) {
+                        $linkInfo = explode(',', $config['DASHBOARD']['LINK' . $i]);
+                        $linkName = trim($linkInfo[0]);
+                        $linkURL = trim($linkInfo[1]);
+                        
+                        echo '<li><a target="_blank" href="' . $linkURL . '" class="dropdown-item">' . $linkName . '</a></li>';
+                    }
+                    
+                    echo '</ul>';
+                    echo '</li>';
+                }
+                ?>
             </ul>
         </div>
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <!-- PUT SOME ICON LINKS HERE -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="" role="button">
-                    <i class="fab fa-telegram-plane"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.facebook.com/FreeDMR.United.Kingdom" role="button">
-                    <i class="fab fa-facebook"></i>
-                </a>
-            </li> -->
-            <!-- PUT YOUR LANGUAGE IN 1ST TO DEFAULT -->
+            <?php
+            // Telegram 
+            if (isset($config['DASHBOARD']['TELEGRAM']) && !empty($config['DASHBOARD']['TELEGRAM'])) {
+                    $telegramLink = $config['DASHBOARD']['TELEGRAM'];
+                    echo '<li class="nav-item">';
+                    echo '<a class="nav-link" href="' . $telegramLink . '" role="button">';
+                    echo '<i class="fab fa-telegram-plane"></i>';
+                    echo '</a>';
+                    echo '</li>';
+            }
+            // Whatsapp
+            if (isset($config['DASHBOARD']['WHATSAPP']) && !empty($config['DASHBOARD']['WHATSAPP'])) {
+                $whatsappLink = $config['DASHBOARD']['WHATSAPP'];
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link" href="' . $whatsappLink . '" role="button">';
+                echo '<i class="fab fa-whatsapp"></i>';
+                echo '</a>';
+                echo '</li>';
+            }
+            // Facebook
+            if (isset($config['DASHBOARD']['FACEBOOK']) && !empty($config['DASHBOARD']['FACEBOOK'])) {
+                $facebookLink = $config['DASHBOARD']['FACEBOOK'];
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link" href="' . $facebookLink . '" role="button">';
+                echo '<i class="fab fa-facebook"></i>';
+                echo '</a>';
+                echo '</li>';
+            }      
+            ?>
             <select class="form-select" id="languageSelect">
-                <option value="pt">PT</option>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-                <option value="fr">FR</option>
-                <option value="it">IT</option>
-                <option value="nl">NL</option>
-                <option value="de">DE</option>
+                <?php
+                if (isset($config['DASHBOARD']['LANGUAGE']) && !empty($config['DASHBOARD']['LANGUAGE'])) {
+                    $selectedLanguage = $config['DASHBOARD']['LANGUAGE'];
+                } else {
+                    $selectedLanguage = 'en';
+                }
+                $languages = array(
+                    'pt' => 'PT',
+                    'en' => 'EN',
+                    'es' => 'ES',
+                    'fr' => 'FR',
+                    'it' => 'IT',
+                    'nl' => 'NL',
+                    'de' => 'DE',
+                );
+                if (array_key_exists($selectedLanguage, $languages)) {
+                    $selectedLanguageName = $languages[$selectedLanguage];
+                    unset($languages[$selectedLanguage]);
+                }
+                echo '<option value="' . $selectedLanguage . '">' . $selectedLanguageName . '</option>';
+                foreach ($languages as $code => $name) {
+                    echo '<option value="' . $code . '">' . $name . '</option>';
+                }
+                ?>
             </select>
             <li class="nav-item">
                 <a class="nav-link" href="#" role="button" id="toggle-mode">

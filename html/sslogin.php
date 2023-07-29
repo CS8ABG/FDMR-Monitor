@@ -2,7 +2,6 @@
 session_start();
 include_once "ssconfunc.php";
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $username = $_POST['callsign'];
   $password = $_POST['password'];
@@ -11,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       header("Location: ssmain.php");
       exit();
   } else {
-      // error message
       $errorMsg = "<span>Invalid callsign or password. Please try again.</span>";
   }
 }
@@ -22,12 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Page Title -->
-  <title>FreeDMR</title>
-  <!-- Favicon -->
+  <title><?php echo $config['DASHBOARD']['DASHTITLE']; ?></title>
   <link rel="icon" type="image/png" href="img/favicon.ico">
-  <!-- Site Description -->
-  <meta name="description" content="FreeDMR Dashboard">
+  <meta name="description" content="<?php echo $config['DASHBOARD']['DASHTITLE']; ?>">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -39,19 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <div class="wrapper">
     <?php if ($display_preloader): ?>
     <div class="preloader flex-column justify-content-center align-items-center">
-      <!-- Preload small icon -->
       <img class="animation__wobble" src="img/Logo_mini.png" alt="" height="60" width="60">
     </div>
     <?php endif; ?>
     <?php include 'include/navbar.php';?>
-    <!-- Background image -->
-    <!-- <div class="content-wrapper" style="background-image: url('img/bk.jpg'); background-attachment: fixed;"> -->
-    <div class="content-wrapper">
+    <div class="content-wrapper"<?php if ($config['DASHBOARD']['BACKGROUND']) echo ' style="background-image: url(\'img/bk.jpg\'); background-attachment: fixed;"'; ?>>
       <div class="content-header">
         <div class="container">
           <div class="row mb-2 justify-content-center">
             <div class="col-sm-auto">
-              <!-- Header logo -->
               <img src="../img/logo.png" alt="FreeDMR" width="100%">
             </div>
           </div>
@@ -66,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               </div>
               <div class="card">
                 <div class="card-body">
-                  <!-- <p class="login-box-msg">Iniciar Sessão</p> -->
                   <?php if (isset($errorMsg)): ?>
                   <p class="text-center">
                     <?php echo $errorMsg; ?>

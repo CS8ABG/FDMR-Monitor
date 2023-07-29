@@ -113,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = updateDevOptions($intId, $generatedOptions);
 
         if ($result) {
-            //echo "<p class='text-success'>Options updated successfully!</p>";
             header("Refresh: 0; url=".$_SERVER['PHP_SELF']);
             exit();
         } else {
@@ -128,12 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Page Title -->
-    <title>FreeDMR</title>
+    <title><?php echo $config['DASHBOARD']['DASHTITLE']; ?></title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/favicon.ico">
     <!-- Site Description -->
-    <meta name="description" content="FreeDMR Dashboard">
+    <meta name="description" content="<?php echo $config['DASHBOARD']['DASHTITLE']; ?>">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -145,19 +143,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="wrapper">
         <?php if ($display_preloader): ?>
         <div class="preloader flex-column justify-content-center align-items-center">
-            <!-- Preload small icon -->
             <img class="animation__wobble" src="img/Logo_mini.png" alt="" height="60" width="60">
         </div>
         <?php endif; ?>
         <?php include 'include/navbar.php';?>
-        <!-- Background image -->
-        <!-- <div class="content-wrapper" style="background-image: url('img/bk.jpg'); background-attachment: fixed;"> -->
-        <div class="content-wrapper">
+        <div class="content-wrapper"<?php if ($config['DASHBOARD']['BACKGROUND']) echo ' style="background-image: url(\'img/bk.jpg\'); background-attachment: fixed;"'; ?>>
             <div class="content-header">
                 <div class="container">
                     <div class="row mb-2 justify-content-center">
                         <div class="col-sm-auto">
-                            <!-- Header logo -->
                             <img src="../img/logo.png" alt="FreeDMR" width="100%">
                         </div>
                     </div>
@@ -421,9 +415,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (inputs[i].value !== '') {
                 let value = parseInt(inputs[i].value);
                 if (values.includes(value)) {
-                    // If the value is already in the array, show an error message
                     //alert('You cannot enter the same number twice!');
-                    // Reset the value of the input field
                     inputs[i].value = '';
                     updateGeneratedText();
                 } else {
