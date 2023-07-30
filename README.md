@@ -9,6 +9,35 @@
 
 **This branch has exactly the same features as the main branch, including Self Service.**
 
+*** 2023/07/29 ***
+- Added new flags.
+- Introduced a new stanza called `DASHBOARD` in the configuration file(fdmr-mon.cfg).
+- Users can now customize the dashboard settings using the `DASHBOARD` stanza.
+- Display country flag before callsign in the lastheard table.
+- Added power, latitude, longitude, and height in repeater/hotspot descriptions.
+- Improved layout: Boxes and tables now hide when no repeaters, hotspots, or bridges are present.
+
+*** 2023/70/23 ***
+- The dashboard is now fully responsive and adapts to different screen sizes and devices.
+- Users can now switch between dark and light mode for a more comfortable viewing experience.
+- The dashboard now supports multiple languages, making it more accessible to users around the world.
+- The main page of the dashboard now displays the number of active QSOs, connected repeaters, hotspots, and bridges.
+- An new options calculator has been integrated into the dashboard for easy use.
+
+## Flags:
+***Flags have been introduced to add visual indicators for Talkgroups (TG) or DMR IDs. To enable flags for specific TGs or DMR IDs, follow these steps:***
+
+- If you see the world flag flickering in the `lastheard`, `Linked systems`, etc. tables, you need to add or copy a new flag image in the `flags` folder.
+- The flag image should be named with the first three digits of the Talkgroup or DMR ID.
+- For example, if the Talkgroup is 12345678, place a file called `123.png` in the `flags` folder.
+
+## Repeaters, Hotspots, and Bridges:
+***The dashboard now distinguishes between Repeaters, Hotspots, and Bridges based on their DMR IDs and/or TX/RX frequency.***
+
+- If a DMR ID has 6 digits, it is considered a Repeater and will be displayed in the `Repeaters` table.
+- If a DMR ID has 7 digits or more and has a TX/RX frequency associated with it, it is recognized as a Hotspot and will be shown in the `Hotspots` table.
+- If a DMR ID has 7 digits or more and has a TX/RX frequency of 0 (zero), it is identified as a Bridge and will appear in the `Bridges` table.
+
 ## Install Instructions
 
 FDMR Monitor has been tested on Debian v10 and v11
