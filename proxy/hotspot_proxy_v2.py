@@ -28,18 +28,17 @@ from twisted.internet.defer import inlineCallbacks
 from twisted.internet import reactor, task
 from setproctitle import setproctitle
 from dmr_utils3.utils import int_id
-
+import Pyro5.api
 from proxy_db import ProxyDB
 
 # Does anybody read this stuff? There's a PEP somewhere that says I should do this.
 __author__     = 'Simon Adlem - G7RZU'
-__verion__     = '1.0.0'
-__copyright__  = 'Copyright (c) Simon Adlem, G7RZU 2020,2021,2022'
+__verion__     = '23.10.14'
+__copyright__  = 'Copyright (c) Simon Adlem, G7RZU 2020,2021,2022,2023'
 __credits__    = 'Jon Lee, G4TSN; Norman Williams, M6NBP; Christian, OA4DOA'
 __license__    = 'GNU GPLv3'
 __maintainer__ = 'Simon Adlem G7RZU'
 __email__      = 'simon@gb7fr.org.uk'
-
 
 def IsIPv4Address(ip):
     try:
@@ -48,8 +47,7 @@ def IsIPv4Address(ip):
     except ValueError as errorCode:
         pass
         return False
-
-
+    
 def IsIPv6Address(ip):
     try:
         ipaddress.IPv6Address(ip)
@@ -57,12 +55,45 @@ def IsIPv6Address(ip):
     except ValueError as errorCode:
         pass
 
+class privHelper():
+    def __init__(self):
+        self._netfilterURI = 'PYRO:netfilterControl@./u:/run/priv_control/priv_control.unixsocket'
+        self._conntrackURI = 'PYRO:conntrackControl@./u:/run/priv_control/priv_control.unixsocket'
+
+    def addBL(self,dport,ip):
+        try:
+            with Pyro5.api.Proxy(self._netfilterURI) as nf:
+                nf.blocklistAdd(dport,ip)
+        except Exception as e:
+            print('(PrivError) {}'.format(e))
+
+    def delBL(self,dport,ip):
+        try:
+            with Pyro5.api.Proxy(self._netfilterURI) as nf:
+                nf.blocklistDel(dport,ip)
+        except Exception as e:
+            print('(PrivError) {}'.format(e))
+
+    def blocklistFlush(self):
+        try:
+            with Pyro5.api.Proxy(self._netfilterURI) as nf:
+                nf.blocklistFlush()
+        except Exception as e:
+            print('(PrivError) {}'.format(e))
+
+    def flushCT(self):
+        try:
+            with Pyro5.api.Proxy(self._conntrackURI) as ct:
+                ct.flushUDPTarget(62031)
+        except Exception as e:
+            print('(PrivError) {}'.format(e))
+
 
 class Proxy(DatagramProtocol):
 
-    def __init__(self, Master, ListenPort, connTrack, peerTrack, blackList, IPBlackList, Timeout,
-                 Debug, ClientInfo, DestportStart, DestPortEnd, db_proxy, selfservice):
+    def __init__(self,Master,ListenPort,connTrack,peerTrack,blackList,IPBlackList,Timeout,Debug,ClientInfo,DestportStart,DestPortEnd,privHelper,rptlTrack,db_proxy,selfservice):
         self.master = Master
+        self.ListenPort = ListenPort
         self.connTrack = connTrack
         self.peerTrack = peerTrack
         self.timeout = Timeout
@@ -73,22 +104,28 @@ class Proxy(DatagramProtocol):
         self.destPortStart = DestportStart
         self.destPortEnd = DestPortEnd
         self.numPorts = DestPortEnd - DestportStart
+        self.privHelper = privHelper
+        self.rptlTrack = rptlTrack
         self.db_proxy = db_proxy
         self.selfserv = selfservice
 
     def reaper(self,_peer_id):
         if self.debug:
-            print('dead', _peer_id)
+            print("dead",_peer_id)
         if self.clientinfo and _peer_id != b'\xff\xff\xff\xff':
-            print(f"{datetime.now().replace(microsecond=0)} Client: ID:{str(int_id(_peer_id)).rjust(9)} "
-                  f"IP:{self.peerTrack[_peer_id]['shost'].rjust(15)} Port:{self.peerTrack[_peer_id]['sport']} Removed.")
+            print(f"{datetime.now().replace(microsecond=0)} Client: ID:{str(int_id(_peer_id)).rjust(9)} IP:{self.peerTrack[_peer_id]['shost'].rjust(15)} Port:{self.peerTrack[_peer_id]['sport']} Removed.")
         self.transport.write(b'RPTCL'+_peer_id, (self.master,self.peerTrack[_peer_id]['dport']))
+        #Tell client we have closed the session - 3 times, in case they are on a lossy network
+        self.transport.write(b'MSTCL',(self.peerTrack[_peer_id]['shost'],self.peerTrack[_peer_id]['sport']))
+        self.transport.write(b'MSTCL',(self.peerTrack[_peer_id]['shost'],self.peerTrack[_peer_id]['sport']))
+        self.transport.write(b'MSTCL',(self.peerTrack[_peer_id]['shost'],self.peerTrack[_peer_id]['sport']))
         self.connTrack[self.peerTrack[_peer_id]['dport']] = False
         if self.selfserv:
             self.db_proxy.updt_tbl('log_out', _peer_id)
         del self.peerTrack[_peer_id]
 
     def datagramReceived(self, data, addr):
+        
         # HomeBrew Protocol Commands
         DMRD    = b'DMRD'
         DMRA    = b'DMRA'
@@ -108,34 +145,43 @@ class Proxy(DatagramProtocol):
         RPTP    = b'RPTP'
         RPTA    = b'RPTA'
         RPTO    = b'RPTO'
-
+        
         #Proxy control commands
         PRBL    = b'PRBL'
-
+        
+        #Proxy info commands 
+        PRIN    = b'PRIN'
+        
         _peer_id = False
+        
         host,port = addr
+        
         nowtime = time()
+        
         Debug = self.debug
-
+        
         if host in self.IPBlackList:
             return
-
+        
         #If the packet comes from the master
         if host == self.master:
             _command = data[:4]
-
+            
             if _command == PRBL:
                 _peer_id = data[4:8]
                 _bltime = data[8:].decode('UTF-8')
                 _bltime = float(_bltime)
-                try:
+                try: 
                     self.IPBlackList[self.peerTrack[_peer_id]['shost']] = _bltime
                 except KeyError:
                     return
                 if self.clientinfo:
-                    print('Add to blacklist: host {}. Expire time {}').format(self.peerTrack[_peer_id]['shost'],_bltime)
+                    print('Add to blacklist: host {}. Expire time {}'.format(self.peerTrack[_peer_id]['shost'],_bltime))
+                if self.privHelper:
+                    print('Ask priv_helper to add to iptables: host {}, port {}.'.format(self.peerTrack[_peer_id]['shost'],self.ListenPort))
+                    reactor.callInThread(self.privHelper.addBL,self.ListenPort,self.peerTrack[_peer_id]['shost'])
                 return
-
+            
             if _command == DMRD:
                 _peer_id = data[11:15]
             elif  _command == RPTA:
@@ -149,26 +195,49 @@ class Proxy(DatagramProtocol):
                     _peer_id = data[7:11]
             elif _command == MSTC:
                     _peer_id = data[5:9]
-
+                
             if self.debug:
                 print(data)
             if _peer_id in self.peerTrack:
                 self.transport.write(data,(self.peerTrack[_peer_id]['shost'],self.peerTrack[_peer_id]['sport']))
                 # Remove the client after send a MSTN or MSTC packet
-                if _command in (MSTN, MSTC):
-                    # Give time to the client for a reply to prevent port reassignment
+                if _command in (MSTN,MSTC):
+                    # Give time to the client for a reply to prevent port reassignment 
                     self.peerTrack[_peer_id]['timer'].reset(15)
+ 
             return
-
+            
+                   
         else:
             _command = data[:4]
-
+            
             if _command == DMRD:                # DMRData -- encapsulated DMR data frame
                 _peer_id = data[11:15]
             elif _command == DMRA:              # DMRAlias -- Talker Alias information
                 _peer_id = data[4:8]
             elif _command == RPTL:              # RPTLogin -- a repeater wants to login
                 _peer_id = data[4:8]
+
+                #if we have seen more than 20 RPTL packets from this IP since the RPTL tracking table was reset (every 60 secs)
+                #blacklist IP for 10 minutes
+                if host not in self.rptlTrack:
+                    self.rptlTrack[host] = 1
+                else:
+                    self.rptlTrack[host] += 1
+
+                if self.rptlTrack[host] > 20:
+                    print('(RPTL) exceeded max: {}'.format(self.rptlTrack[host]))
+                    _bltime = nowtime + 600
+                    self.IPBlackList[host] = _bltime
+                    self.rptlTrack.pop(host)
+
+                    if self.clientinfo:
+                        print('(RPTL) Add to blacklist: host {}. Expire time {}'.format(host,_bltime))
+                    if self.privHelper:
+                        print('(RPTL) Ask priv_helper to add to iptables: host {}, port {}.'.format(host,self.ListenPort))
+                        reactor.callInThread(self.privHelper.addBL,self.ListenPort,host)
+                    return
+
             elif _command == RPTK:              # Repeater has answered our login challenge
                 _peer_id = data[4:8]
             elif _command == RPTC:              # Repeater is sending it's configuraiton OR disconnecting
@@ -218,7 +287,7 @@ class Proxy(DatagramProtocol):
 
             else:
                 if int_id(_peer_id) in self.blackList:
-                    return
+                    return   
                 # Make a list with the available ports
                 _ports_avail = [port for port in self.connTrack if not self.connTrack[port]]
                 if _ports_avail:
@@ -237,8 +306,7 @@ class Proxy(DatagramProtocol):
                 self.transport.write(pripacket, (self.master,_dport))
 
                 if self.clientinfo and _peer_id != b'\xff\xff\xff\xff':
-                    print(f'{datetime.now().replace(microsecond=0)} New client: ID:{str(int_id(_peer_id)).rjust(9)} '
-                          f'IP:{host.rjust(15)} Port:{port}, assigned to port:{_dport}.')
+                    print(f'{datetime.now().replace(microsecond=0)} New client: ID:{str(int_id(_peer_id)).rjust(9)} IP:{host.rjust(15)} Port:{port}, assigned to port:{_dport}.')
                 if self.debug:
                     print(data)
                 return
@@ -286,10 +354,14 @@ if __name__ == '__main__':
     import argparse
     import sys
     import json
+    import stat
+    import functools
+
+    print = functools.partial(print, flush=True)
 
     #Set process title early
     setproctitle(__file__)
-
+        
     # Change the current directory to the location of the application
     os.chdir(os.path.dirname(os.path.realpath(sys.argv[0])))
 
@@ -302,14 +374,14 @@ if __name__ == '__main__':
     # Ensure we have a path for the config file, if one wasn't specified, then use the execution directory
     if not cli_args.CONFIG_FILE:
         cli_args.CONFIG_FILE = os.path.dirname(os.path.abspath(__file__))+'/freedmr.cfg'
-
+    
     _config_file = cli_args.CONFIG_FILE
-
+    
     config = configparser.ConfigParser()
-
+    
     if not config.read(_config_file):
         print('Configuration file \''+_config_file+'\' is not a valid configuration file!')
-
+        
     try:
 
         Master = config.get('PROXY','Master')
@@ -333,10 +405,10 @@ if __name__ == '__main__':
 
     except configparser.Error as err:
         print('Error processing configuration file -- {}'.format(err))
-
+        
         print('Using default config')
 #*** CONFIG HERE ***
-
+    
         Master = "127.0.0.1"
         ListenPort = 62031
         #'' = all IPv4, '::' = all IPv4 and IPv6 (Dual Stack)
@@ -363,15 +435,17 @@ if __name__ == '__main__':
     
     CONNTRACK = {}
     PEERTRACK = {}
-    
+    RPTLTRACK = {}
+    PRIV_HELPER = None
+
     # Set up the signal handler
     def sig_handler(_signal, _frame):
         print('(GLOBAL) SHUTDOWN: PROXY IS TERMINATING WITH SIGNAL {}'.format(str(_signal)))
         reactor.stop()
 
-    # Set signal handers so that we can gracefully exit if need be
-    for sig in [signal.SIGINT, signal.SIGTERM]:
-        signal.signal(sig, sig_handler)
+    #Install signal handlers
+    signal.signal(signal.SIGTERM, sig_handler)
+    signal.signal(signal.SIGINT, sig_handler)
         
     #readState()
     
@@ -387,13 +461,24 @@ if __name__ == '__main__':
     if 'FDPROXY_CLIENTINFO' in os.environ:
         ClientInfo = bool(os.environ['FDPROXY_CLIENTINFO'])
     if 'FDPROXY_LISTENPORT' in os.environ:
-        ListenPort = os.environ['FDPROXY_LISTENPORT']
+        ListenPort = int(os.environ['FDPROXY_LISTENPORT'])
+
+    unixSocket = '/run/priv_control/priv_control.unixsocket'
+
+    if os.path.exists(unixSocket) and stat.S_ISSOCK(os.stat(unixSocket).st_mode):
+        print('(PRIV) Found UNIX socket. Enabling priv helper')
+        PRIV_HELPER = privHelper()
+        print('(PRIV) flush conntrack')
+        PRIV_HELPER.flushCT()
+        print('(PRIV) flush blocklist')
+        PRIV_HELPER.blocklistFlush()
+
 
     for port in range(DestportStart,DestPortEnd+1,1):
         CONNTRACK[port] = False
-
+    
     #If we are listening IPv6 and Master is an IPv4 IPv4Address
-    #IPv6ify the address.
+    #IPv6ify the address. 
     if ListenIP == '::' and IsIPv4Address(Master):
         Master = '::ffff:' + Master
 
@@ -404,8 +489,7 @@ if __name__ == '__main__':
     else:
         db_proxy = None
 
-    srv_proxy = Proxy(Master, ListenPort, CONNTRACK, PEERTRACK, BlackList, IPBlackList, Timeout,
-                      Debug, ClientInfo, DestportStart, DestPortEnd, db_proxy, use_selfservice)
+    srv_proxy = Proxy(Master,ListenPort,CONNTRACK,PEERTRACK,BlackList,IPBlackList,Timeout,Debug,ClientInfo,DestportStart,DestPortEnd,PRIV_HELPER, RPTLTRACK, db_proxy, use_selfservice)
 
     reactor.listenUDP(ListenPort, srv_proxy, interface=ListenIP)
 
@@ -432,12 +516,12 @@ if __name__ == '__main__':
         for port in CONNTRACK:
             if CONNTRACK[port]:
                 count = count+1
-
+                
         totalPorts = DestPortEnd - DestportStart
         freePorts = totalPorts - count
-
+        
         print("{} ports out of {} in use ({} free)".format(count,totalPorts,freePorts))
-
+        
     def blackListTrimmer():
         _timenow = time()
         _dellist = []
@@ -445,20 +529,35 @@ if __name__ == '__main__':
             deletetime = IPBlackList[entry]
             if deletetime and deletetime < _timenow:
                 _dellist.append(entry)
-
+        
         for delete in _dellist:
             IPBlackList.pop(delete)
             if ClientInfo:
-                print('Remove dynamic blacklist entry for {}').format(delete)
+                print('Remove dynamic blacklist entry for {}'.format(delete))
+            if PRIV_HELPER:
+                print('Ask priv helper to remove blacklist entry for {} from iptables'.format(delete))
+                reactor.callInThread(PRIV_HELPER.delBL,ListenPort,delete)
+
+    def rptlTrimmer():
+        RPTLTRACK.clear()
+        print('Purge RPTL table')
 
 
+        
     if Stats == True:
         stats_task = task.LoopingCall(stats)
         statsa = stats_task.start(30)
         statsa.addErrback(loopingErrHandle)
-
+        
     blacklist_task = task.LoopingCall(blackListTrimmer)
     blacklista = blacklist_task.start(15)
     blacklista.addErrback(loopingErrHandle)
 
+
+    rptlTrimmer_task = task.LoopingCall(rptlTrimmer)
+    rptlTrimmera = rptlTrimmer_task.start(60)
+    rptlTrimmera.addErrback(loopingErrHandle)
+
+    
     reactor.run()
+    
