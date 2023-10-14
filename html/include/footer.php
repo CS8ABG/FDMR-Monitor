@@ -7,7 +7,7 @@
         ?>Copyright (c) 2016-2023 | The Regents of the <a
                         target="_blank" href=http://k0usy.mystrikingly.com>K0USY Group</a>. All rights reserved. | <a
                         title="FDMR Monitor OA4DOA v270422" target="_blank"
-                        href="https://github.com/yuvelq/FDMR-Monitor.git">Version OA4DOA 2022</a> with <a title="CS8ABG Dash v23.07.29ss" href=https://github.com/CS8ABG/FDMR-Monitor.git>CS8ABG</a> Dash
+                        href="https://github.com/yuvelq/FDMR-Monitor.git">Version OA4DOA 2022</a> with <a title="CS8ABG Dash v23.10.14ss" href=https://github.com/CS8ABG/FDMR-Monitor.git>CS8ABG</a> Dash
                         <?php
         if (isset($config['DASHBOARD']['FOOTER2']) && !empty($config['DASHBOARD']['FOOTER2'])) {
             $footer2Value = $config['DASHBOARD']['FOOTER2'];
