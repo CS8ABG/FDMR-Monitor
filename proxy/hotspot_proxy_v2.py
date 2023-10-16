@@ -218,14 +218,14 @@ class Proxy(DatagramProtocol):
             elif _command == RPTL:              # RPTLogin -- a repeater wants to login
                 _peer_id = data[4:8]
 
-                #if we have seen more than 20 RPTL packets from this IP since the RPTL tracking table was reset (every 60 secs)
+                #if we have seen more than 50 RPTL packets from this IP since the RPTL tracking table was reset (every 60 secs)
                 #blacklist IP for 10 minutes
                 if host not in self.rptlTrack:
                     self.rptlTrack[host] = 1
                 else:
                     self.rptlTrack[host] += 1
 
-                if self.rptlTrack[host] > 20:
+                if self.rptlTrack[host] > 50:
                     print('(RPTL) exceeded max: {}'.format(self.rptlTrack[host]))
                     _bltime = nowtime + 600
                     self.IPBlackList[host] = _bltime
