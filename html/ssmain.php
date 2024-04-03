@@ -1,4 +1,5 @@
 <?php
+include("config.php");
 session_start();
 include_once "ssconfunc.php";
 checkSessionTimeout();

@@ -1,17 +1,26 @@
 <?php
+include 'config.php';
 session_start();
 include_once "ssconfunc.php";
-
+ 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $username = $_POST['callsign'];
   $password = $_POST['password'];
-
+ 
   if (authenticateUser($username, $password)) {
       header("Location: ssmain.php");
       exit();
   } else {
       $errorMsg = "<span>Invalid callsign or password. Please try again.</span>";
   }
+} else if ($_SERVER["REQUEST_METHOD"] === "GET" && !isset($_SESSION['autologin'])) {
+  if(authenticateUserByIP()) {
+    header("Location: ssmain.php");
+    exit();
+  } 
+}
+if(isset($_SESSION['autologin'])) {
+  unset($_SESSION['autologin']);
 }
 ?>
 <!DOCTYPE html>
