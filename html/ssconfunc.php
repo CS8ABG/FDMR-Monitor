@@ -1,29 +1,69 @@
 <?php
-// Authenticate User
-function authenticateUser($username, $password)
-{
-    $conn = connectDatabase();
-    $callsign = $conn->real_escape_string($username);
-    $query = "SELECT int_id, callsign, psswd FROM Clients WHERE callsign = '$callsign'";
-    $result = $conn->query($query);
-    $int_ids = [];
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $storedPassword = $row['psswd'];
-            if (hash_pbkdf2("sha256", $password, "FreeDMR", 2000) === $storedPassword) {
-                $_SESSION['user_id'] = $row['callsign'];
-                $int_ids[] = $row['int_id'];
+    // Authenticate User
+    function authenticateUser($username, $password)
+    {
+        $conn = connectDatabase();
+        $callsign = $conn->real_escape_string($username);
+        $query = "SELECT int_id, callsign, psswd FROM Clients WHERE callsign = '$callsign' AND logged_in = 1";
+        $result = $conn->query($query);
+        $int_ids = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $storedPassword = $row['psswd'];
+                if (hash_pbkdf2("sha256", $password, "FreeDMR", 2000) === $storedPassword) {
+                    $_SESSION['user_id'] = $row['callsign'];
+                    $int_ids[] = $row['int_id'];
+                }
             }
         }
+     
+        if (!empty($int_ids)) {
+            $_SESSION['int_ids'] = array_unique($int_ids, SORT_NUMERIC);
+            return true;
+        } else {
+            return false;
+        }
     }
+     
+    
 
-    if (!empty($int_ids)) {
-        $_SESSION['int_ids'] = $int_ids;
-        return true;
-    } else {
-        return false;
+    function authenticateUserByIP()
+    {
+        $conn = connectDatabase();
+     
+        $query = "SELECT DISTINCT callsign FROM Clients WHERE host = '{$_SERVER['REMOTE_ADDR']}' AND logged_in = 1";
+        $result = $conn->query($query);
+     
+        $callsign  = "";
+     
+        // Only allow autologin if one callsign is logged from the client ip address
+        if($result->num_rows != 1) {
+            return false;
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $callsign = $row['callsign'];
+            }
+        }
+     
+        $query = "SELECT int_id, callsign, psswd FROM Clients WHERE callsign = '{$callsign}' AND logged_in = 1";
+        $result = $conn->query($query);
+        $int_ids = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+     
+                $_SESSION['user_id'] = $row['callsign'];
+                $int_ids[] = $row['int_id'];
+     
+            }
+        }
+     
+        if (!empty($int_ids)) {
+            $_SESSION['int_ids'] = array_unique($int_ids, SORT_NUMERIC);
+            return true;
+        } else {
+            return false;
+        }
     }
-}
 // Session timeout
 function checkSessionTimeout()
 {
