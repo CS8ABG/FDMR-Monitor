@@ -30,7 +30,7 @@
                     <a href="index.php?p=monitor" class="nav-link" id="nav_mon"></a>
                 </li>
                 <li class="nav-item">
-                    <a href="sslogin.php" class="nav-link">Self Service</a>
+                    <a href="ssmain.php" class="nav-link">Self Service</a>
                 </li>
                 <li class="nav-item dropdown dropdown-hover">
                     <a id="dropdownSubMenu1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
