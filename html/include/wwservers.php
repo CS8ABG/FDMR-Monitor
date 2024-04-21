@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                   <?php
-                  $url = '';
+                  $url = $config['DASHBOARD']['SERVER_LIST'];
                   $data = file_get_contents($url);
                   $lines = explode("\n", trim($data));
                   array_shift($lines); // remove first line

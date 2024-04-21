@@ -1,28 +1,11 @@
-**Dashboard with Self Service for FreeDMR Servers**
+**Dashboard with Self Service for FDMR Servers**
 
 ![Dashboard](./screenshot.png)
 
 ***This version has been forked from FDMR Monitor with Self Service by OA4DOA.***
 
-
-## Changes to the Dashboard
-
 **This branch has exactly the same features as the main branch, including Self Service.**
 
-*** 2023/07/29 ***
-- Added new flags.
-- Introduced a new stanza called `DASHBOARD` in the configuration file(fdmr-mon.cfg).
-- Users can now customize the dashboard settings using the `DASHBOARD` stanza.
-- Display country flag before callsign in the lastheard table.
-- Added power, latitude, longitude, and height in repeater/hotspot descriptions.
-- Improved layout: Boxes and tables now hide when no repeaters, hotspots, or bridges are present.
-
-*** 2023/70/23 ***
-- The dashboard is now fully responsive and adapts to different screen sizes and devices.
-- Users can now switch between dark and light mode for a more comfortable viewing experience.
-- The dashboard now supports multiple languages, making it more accessible to users around the world.
-- The main page of the dashboard now displays the number of active QSOs, connected repeaters, hotspots, and bridges.
-- An new options calculator has been integrated into the dashboard for easy use.
 
 ## Flags:
 ***Flags have been introduced to add visual indicators for Talkgroups (TG) or DMR IDs. To enable flags for specific TGs or DMR IDs, follow these steps:***

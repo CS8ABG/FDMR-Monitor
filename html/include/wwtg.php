@@ -18,7 +18,7 @@
                 <tbody>
                   <?php
                     // URL of the CSV file
-                    $csvFile = 'https://freedmr.cymru/talkgroups/Talkgroups_FreeDMR.csv';
+                    $csvFile = $config['DASHBOARD']['TG_LIST'];
 
                     // Read the CSV file
                     $fileHandle = fopen($csvFile, 'r');

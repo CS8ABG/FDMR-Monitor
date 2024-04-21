@@ -1,9 +1,9 @@
 <nav class="main-header navbar navbar-expand-lg navbar-light navbar-dark text-sm">
     <div class="container text-nowrap">
         <a href="#" class="navbar-brand">
-            <img src="img/Logo_mini.png" alt="FreeDMR" class="brand-image img-circle elevation-3"
+            <img src="img/Logo_mini.png" alt="<?php echo $config['DASHBOARD']['NAVTITLE']; ?>" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
-            <span class="brand-text font-weight-light">FreeDMR</span>
+            <span class="brand-text font-weight-light"><?php echo $config['DASHBOARD']['NAVTITLE']; ?></span>
         </a>
         <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +40,21 @@
                         <li>
                             <a href="index.php?p=calc" class="dropdown-item" id="nav_calc"></a>
                         </li>
-                        <li>
-                            <a href="index.php?p=wwtg" class="dropdown-item" id="nav_tglst"></a>
-                        </li>
-                        <li>
-                            <a href="index.php?p=wwbridges" class="dropdown-item" id="nav_brdglst"></a>
-                        </li>
-                        <!-- <li>
-                            <a href="index.php?p=wwservers" class="dropdown-item" id="nav_srvlst"></a>
-                        </li> -->
+                        <?php
+                        if (isset($config['DASHBOARD']['TG_LIST'])) {
+                            echo '<li><a href="index.php?p=wwtg" class="dropdown-item" id="nav_tglst"></a></li>';
+                        }
+                        ?>
+                        <?php
+                        if (isset($config['DASHBOARD']['BRIDGES_LIST'])) {
+                            echo '<li><a href="index.php?p=wwbridges" class="dropdown-item" id="nav_brdglst"></a></li>';
+                        }
+                        ?>
+                        <?php
+                        if (isset($config['DASHBOARD']['SERVER_LIST'])) {
+                            echo '<li><a href="index.php?p=wwservers" class="dropdown-item" id="nav_srvlst"></a></li>';
+                        }
+                        ?>
                     </ul>
                 </li>
                 <?php
