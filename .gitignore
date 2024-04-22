@@ -6,3 +6,4 @@
 fdmr-mon.cfg
 venv
 proxy/proxy.cfg
+log/fdmr-mon.log
