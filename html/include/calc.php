@@ -164,11 +164,11 @@
                             <div class="row justify-content-center">
                                 <p class="mb-1"><b>DMR Gateway</b></p>
                             </div>
-                            <textarea class="form-control text-sm form-control-sm" id="generatedTextWithQuotes" rows="2"
+                            <textarea class="form-control text-sm form-control-sm" id="generatedOptionsQuotes" rows="2"
                                 readonly></textarea>
                             <div class="row justify-content-center mt-4 mb-4">
                                 <button class="btn btn-primary mt-2"
-                                    onclick="copyToClipboard('generatedTextWithQuotes')" id="calc_copy1">
+                                    onclick="copyToClipboard('generatedOptionsQuotes')" id="calc_copy1">
                                 </button>
                             </div>
                         </div>
@@ -176,11 +176,11 @@
                             <div class="row justify-content-center">
                                 <p class="mb-1"><b>DMR Options=</b></p>
                             </div>
-                            <textarea class="form-control text-sm form-control-sm" id="generatedTextWithoutQuotes" rows="2"
+                            <textarea class="form-control text-sm form-control-sm" id="generatedOptions" rows="2"
                                 readonly></textarea>
                             <div class="row justify-content-center mt-4 mb-4">
                                 <button class="btn btn-primary mt-2"
-                                    onclick="copyToClipboard('generatedTextWithoutQuotes')" id="calc_copy2">
+                                    onclick="copyToClipboard('generatedOptions')" id="calc_copy2">
                                 </button>
                             </div>
                         </div>
@@ -261,9 +261,6 @@
             if (inputs[i].value !== '') {
                 let value = parseInt(inputs[i].value);
                 if (values.includes(value)) {
-                    // If the value is already in the array, show an error message
-                    //alert('You cannot enter the same number twice!');
-                    // Reset the value of the input field
                     inputs[i].value = '';
                     updateGeneratedText();
                 } else {
@@ -310,53 +307,36 @@
         var singleModeValue = singleModeSelect.value;
         var timeoutValue = timeoutInput.value;
         var modeSelectorValue = modeSelector.value;
-        var generatedTextWithQuotes = 'Options="';
-        if (timeslots1.length > 0 && modeSelectorValue === 'Duplex') {
-            generatedTextWithQuotes += 'TS1=' + timeslots1.join(',') + ';';
-        }
-        if (timeslots2.length > 0 && dialTGValue <= 0) {
-            generatedTextWithQuotes += 'TS2=' + timeslots2.join(',') + ';';
-        }
-        if (dialTGValue > 0) {
-            generatedTextWithQuotes += 'DIAL=' + dialTGValue + ';';
-        }
-        if (voiceValue !== '-1') {
-            generatedTextWithQuotes += 'VOICE=' + voiceValue + ';';
-        }
-        if (voiceValue === '1') {
-            generatedTextWithQuotes += 'LANG=' + languageValue + ';';
-        }
-        if (singleModeValue !== '-1') {
-            generatedTextWithQuotes += 'SINGLE=' + singleModeValue + ';';
-        }
-        if (timeoutValue > 0) {
-            generatedTextWithQuotes += 'TIMER=' + timeoutValue + '"';
-        }
         // Generate the text without quotes
-        var generatedTextWithoutQuotes = '';
+        var generatedOptions = '';
         if (timeslots1.length > 0 && modeSelectorValue === 'Duplex') {
-            generatedTextWithoutQuotes += 'TS1=' + timeslots1.join(',') + ';';
+            generatedOptions += 'TS1=' + timeslots1.join(',') + ';';
         }
         if (timeslots2.length > 0 && dialTGValue <= 0) {
-            generatedTextWithoutQuotes += 'TS2=' + timeslots2.join(',') + ';';
+            generatedOptions += 'TS2=' + timeslots2.join(',') + ';';
         }
         if (dialTGValue > 0) {
-            generatedTextWithoutQuotes += 'DIAL=' + dialTGValue + ';';
+            generatedOptions += 'DIAL=' + dialTGValue + ';';
         }
         if (voiceValue !== '-1') {
-            generatedTextWithoutQuotes += 'VOICE=' + voiceValue + ';';
+            generatedOptions += 'VOICE=' + voiceValue + ';';
         }
         if (voiceValue === '1') {
-            generatedTextWithoutQuotes += 'LANG=' + languageValue + ';';
+            generatedOptions += 'LANG=' + languageValue + ';';
         }
         if (singleModeValue !== '-1') {
-            generatedTextWithQuotes += 'SINGLE=' + singleModeValue + ';';
+            generatedOptions += 'SINGLE=' + singleModeValue + ';';
         }
         if (timeoutValue > 0) {
-            generatedTextWithoutQuotes += 'TIMER=' + timeoutValue;
+            generatedOptions += 'TIMER=' + timeoutValue + ';';
         }
-        document.getElementById('generatedTextWithQuotes').value = generatedTextWithQuotes;
-        document.getElementById('generatedTextWithoutQuotes').value = generatedTextWithoutQuotes;
+        var generatedOptionsQuotes = '';
+        if (generatedOptions > '1') {
+            generatedOptionsQuotes += 'Options="'+ generatedOptions + '"';
+        }
+        
+        document.getElementById('generatedOptionsQuotes').value = generatedOptionsQuotes;
+        document.getElementById('generatedOptions').value = generatedOptions;
         checkDupes();
     }
 
