@@ -1,63 +1,57 @@
+{% if _table['MASTERS']|length >0 %}
 <!-- Statistics boxes -->
 {% set countcon = namespace(value=0) %}
 {% set countrepeaters = namespace(value=0) %}
 {% set counthotspots = namespace(value=0) %}
 {% set countbridges = namespace(value=0) %}
 
-{% for _master in _table['MASTERS'] %}
-  {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
+  {% for _master in _table['MASTERS'] %}
+    {% for _client, _cdata in _table['MASTERS'][_master]['PEERS'].items() %}
     {% if _client|string|length == 6 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
-      {% set countrepeaters.value = countrepeaters.value + 1 %}
-    {% endif %}
+        {% set countrepeaters.value = countrepeaters.value + 1 %}
+      {% endif %}
     {% if _client|string|length >= 7 and _cdata['RX_FREQ'] != 'N/A' and _cdata['TX_FREQ'] != 'N/A' %}
-      {% set counthotspots.value = counthotspots.value + 1 %}
-    {% endif %}
-    {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
-      {% set countbridges.value = countbridges.value + 1 %}
-    {% endif %}
-    {% if _cdata[1]['TS'] == True or _cdata[2]['TS'] == True %}
-      {% if _cdata[1]['TRX'] == "RX" %}
-        {% set countcon.value = countcon.value + 1 %}
+        {% set counthotspots.value = counthotspots.value + 1 %}
       {% endif %}
-      {% if _cdata[2]['TRX'] == "RX" %}
-        {% set countcon.value = countcon.value + 1 %}
+      {% if _cdata['RX_FREQ'] == 'N/A' and _cdata['TX_FREQ'] == 'N/A' %}
+        {% set countbridges.value = countbridges.value + 1 %}
       {% endif %}
-    {% endif %}
+      {% if _cdata[1]['TS'] == True or _cdata[2]['TS'] == True %}
+        {% if _cdata[1]['TRX'] == "RX" %}
+          {% set countcon.value = countcon.value + 1 %}
+        {% endif %}
+        {% if _cdata[2]['TRX'] == "RX" %}
+          {% set countcon.value = countcon.value + 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   {% endfor %}
-{% endfor %}
 
 {% for _peer, _pdata in _table['PEERS'].items() %}
-  {% if _pdata[1]['TS'] == True or _pdata[2]['TS'] == True %}
-    {% if _pdata[1]['TRX'] == "RX" %}
-      {% set countcon.value = countcon.value + 1 %}
-    {% endif %}
-    {% if _pdata[2]['TRX'] == "RX" %}
-      {% set countcon.value = countcon.value + 1 %}
-    {% endif %}
-  {% endif %}
-{% endfor %}
-
-{% if _table['OPENBRIDGES']|length > 0 %}
-  {% for _openbridge in _table['OPENBRIDGES'] %}
-    {% set rx = namespace(value=0) %}
-    {% if _table['OPENBRIDGES'][_openbridge]['STREAMS']|length > 0 %}
-      {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS'] if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' %}
-        {% set rx.value=1 %}
-      {% endfor %}
-      {% if rx.value == 1 %}
-        {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS'] if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' %}
-          {% set countcon.value = countcon.value + 1 %}
-        {% endfor %}
+    {% if _pdata[1]['TS'] == True or _pdata[2]['TS'] == True %}
+      {% if _pdata[1]['TRX'] == "RX" %}
+        {% set countcon.value = countcon.value + 1 %}
+      {% endif %}
+      {% if _pdata[2]['TRX'] == "RX" %}
+        {% set countcon.value = countcon.value + 1 %}
       {% endif %}
     {% endif %}
   {% endfor %}
-{% endif %}
 
-  {% if _table['MASTERS']|length == 0 %}
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-    <span class="info-box-text" id="pre_wait"></span>
-  </div>
+{% if _table['OPENBRIDGES']|length > 0 %}
+    {% for _openbridge in _table['OPENBRIDGES'] %}
+      {% set rx = namespace(value=0) %}
+    {% if _table['OPENBRIDGES'][_openbridge]['STREAMS']|length > 0 %}
+      {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS'] if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' %}
+          {% set rx.value=1 %}
+        {% endfor %}
+        {% if rx.value == 1 %}
+        {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS'] if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' %}
+            {% set countcon.value = countcon.value + 1 %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   {% endif %}
 
 <div class="row justify-content-center">
@@ -72,6 +66,8 @@
       </div>
     </div>
   </div>
+  <!-- Repeaters -->
+  {% if countrepeaters.value > 0 %}
   <div class="col-lg-3 col-6">
     <div class="small-box bg-success">
       <div class="inner">
@@ -83,6 +79,9 @@
       </div>
     </div>
   </div>
+  {% endif %}
+  <!-- Hotspots -->
+  {% if counthotspots.value > 0 %}
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
@@ -94,6 +93,9 @@
       </div>
     </div>
   </div>
+  {% endif %}
+  <!-- Bridges -->
+  {% if countbridges.value > 0 %}
   <div class="col-lg-3 col-6">
     <div class="small-box bg-danger">
       <div class="inner">
@@ -105,9 +107,11 @@
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 
   <!-- Activity Table-->
+  {% if countcon.value > 0 %}
   <div class="row">
     <div class="col-12">
       <div class="card"> <!-- 45px header + 75px per line -->
@@ -235,9 +239,10 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
 <!-- Table Last Heard -->
-{% if _table['MASTERS']|length >0 %}
+{% if _table['MASTERS']|length > 0 %}
 <div class="row justify-content-center">
   <div class="col-12">
     <div class="card">
@@ -321,7 +326,6 @@
 {% endif %}
 
 <!-- Connected systems -->
-{% if _table['MASTERS']|length >0 %}
 <div class="row justify-content-center">
   {% if countrepeaters.value > 0 %}
   <div class="col-md-4 col-12">
@@ -425,5 +429,11 @@ Tempo Conetado: {{ _cdata['CONNECTED'] }}"><b>{{_cdata['CALLSIGN']}}</b></a>&nbs
     </div>
   </div>
   {% endif %}
+</div>
+{% else %}
+<!-- Preload page-->
+<div class="preloader flex-column justify-content-center align-items-center">
+  <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+  <span class="info-box-text" id="pre_wait"></span>
 </div>
 {% endif %}
