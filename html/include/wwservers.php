@@ -3,7 +3,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header border-transparent">
-            <h3 class="card-title" id="tbl_srvrs">Servidores Mundiais</h3>
+            <h3 class="card-title" id="tbl_srvrs">World Servers</h3>
           </div>
           <div class="card-body p-0">
             <div class="table-responsive">
@@ -23,8 +23,7 @@
                   $url = $config['DASHBOARD']['SERVER_LIST'];
                   $data = file_get_contents($url);
                   $lines = explode("\n", trim($data));
-                  array_shift($lines); // remove first line
-                  array_shift($lines); // remove second line
+                  $lineCount = count($lines);
                   foreach ($lines as $line) {
                       $fields = str_getcsv($line);
                       list($country, $id, $host, $password, $port) = $fields;
@@ -39,6 +38,8 @@
                   }
                   ?>
                 </tbody>
+                <tfoot>
+                    <td colspan="6"><span>Number of Servers:</span> <?php echo $lineCount; ?></td>
               </table>
             </div>
           </div>
