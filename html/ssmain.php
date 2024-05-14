@@ -477,7 +477,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             genText += 'SINGLE=' + singleModeValue + ';';
         }
         if (timeoutValue > 0) {
-            genText += 'TIMER=' + timeoutValue;
+            genText += 'TIMER=' + timeoutValue + ';';
         }
         document.getElementById('genText').value = genText;
         checkDupes();
